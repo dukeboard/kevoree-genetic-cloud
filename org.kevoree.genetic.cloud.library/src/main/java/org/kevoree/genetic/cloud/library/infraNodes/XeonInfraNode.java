@@ -11,9 +11,8 @@ import org.kevoree.library.sky.api.nodeType.AbstractIaaSNode;
 @Library(name = "Snt-Cloud")
 @DictionaryType({
         @DictionaryAttribute(name = "cost", defaultValue = "30", optional = true),
-        @DictionaryAttribute(name = "consumption", defaultValue = "100", optional = true),
-        @DictionaryAttribute(name = "cpuCount", defaultValue = "1", optional = true),
-        @DictionaryAttribute(name = "maxVMCount", defaultValue = "64", optional = true)
+        @DictionaryAttribute(name = "consumption", defaultValue = "400", optional = true),
+        @DictionaryAttribute(name = "vcpu", defaultValue = "8", optional = true),
 })
 public class XeonInfraNode extends AbstractIaaSNode {
     @Override

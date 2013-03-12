@@ -5,13 +5,14 @@ import org.kevoree.cloner.ModelCloner;
 import org.kevoree.genetic.framework.KevoreePopulationFactory;
 import org.kevoree.impl.DefaultKevoreeFactory;
 import org.kevoree.loader.ModelLoader;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CloudPopulationFactory implements KevoreePopulationFactory {
 
     private static Integer numberOfInfraNode_lowPower = 3;
-    private static Integer numberOfInfraNode_fullPower = 3;
+    private static Integer numberOfInfraNode_fullPower = 2;
 
     private static Integer numberOfCustomerNode = 5;
     private static Integer numberOfSoftwareComp = 4;
