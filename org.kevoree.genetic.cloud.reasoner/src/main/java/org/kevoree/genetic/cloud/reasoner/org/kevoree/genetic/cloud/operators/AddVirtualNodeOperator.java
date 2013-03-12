@@ -29,6 +29,7 @@ public class AddVirtualNodeOperator extends AbstractKevoreeOperator {
         node.setName("cust" + rand.nextInt());
         ContainerNode parent = (ContainerNode) o;
         parent.addHosts(node);
+        containerRoot.addNodes(node);
     }
 
     protected List<Object> selectTarget(ContainerRoot root, String query) {
