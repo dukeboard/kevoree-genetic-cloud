@@ -37,7 +37,6 @@ public class IsolationFitnessTest {
             model.addNodes(node);
             n.addHosts(node);
             i++;
-
             if (nbComponentPerNode == -1) {
                 for (int i2 = 0; i2 < (i % 2) + 1; i2++) {
                     ComponentInstance cinstance = kfactory.createComponentInstance();
@@ -53,8 +52,6 @@ public class IsolationFitnessTest {
                     node.addComponents(cinstance);
                 }
             }
-
-
         }
         IsolationFitness fitness = new IsolationFitness();
         double d = fitness.evaluate(model);

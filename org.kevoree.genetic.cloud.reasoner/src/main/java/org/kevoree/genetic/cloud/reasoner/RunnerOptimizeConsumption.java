@@ -12,7 +12,6 @@ public class RunnerOptimizeConsumption {
     public static void main(String[] args) throws Exception {
         KevoreeGeneticEngine engine = new KevoreeGeneticEngine()
                 .setPopulationFactory(new CloudPopulationFactory())
-
                 .addFitnessFuntion(new ConsumptionFitness());
 
         engine.setMaxGeneration(25);
