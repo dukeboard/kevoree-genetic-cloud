@@ -69,8 +69,11 @@ public class OptimizeRedondencyOperator extends AbstractKevoreeOperator {
                 ComponentInstance inst = factory.createComponentInstance();
                 inst.setName(generateName(targetType));
                 inst.setTypeDefinition(td);
+
                 ContainerNode targetNode = (ContainerNode) target;
-                targetNode.addComponents(inst);
+                if(targetNode.getComponents().size() < globalRedondency){
+                    targetNode.addComponents(inst);
+                }
             }
         }
     }
@@ -79,5 +82,8 @@ public class OptimizeRedondencyOperator extends AbstractKevoreeOperator {
         Random r = new Random();
         return componentTypeName + "_" + Math.abs(r.nextInt());
     }
+
+
+
 
 }

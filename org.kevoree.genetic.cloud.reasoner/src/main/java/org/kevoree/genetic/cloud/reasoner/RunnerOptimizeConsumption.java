@@ -27,13 +27,13 @@ public class RunnerOptimizeConsumption {
         operator.setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
         engine.addOperator(operator);
         engine.addOperator(new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]"));
-        //engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[{name=*}]/hosts[{name=*}]/components[{name=*}]"));
+        engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[{name=*}]/hosts[{name=*}]/components[{name=*}]"));
         //engine.addOperator(new RemoveChildNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
         //engine.addOperator(new MoveNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
 
         /* Configure fitness */
         engine.addFitnessFuntion(new ConsumptionFitness());
-        //engine.addFitnessFuntion(new IsolationFitness());
+        engine.addFitnessFuntion(new IsolationFitness());
         engine.addFitnessFuntion(new RedondencyFitness().setAllTypes(operator.getAllTypes()));
         engine.addFitnessFuntion(new EmptySlotFitness());
 

@@ -37,11 +37,15 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
             counter.put(tdName, 0);
         }
         for (ContainerNode node : model.getNodes()) {
+            List<String> alreadyFoundOnNode = new ArrayList<String>();
             for (ComponentInstance instance : node.getComponents()) {
                 Integer val = counter.get(instance.getTypeDefinition().getName());
                 if (val != null) {
-                    val = val + 1;
-                    counter.put(instance.getTypeDefinition().getName(), val);
+                    if (!alreadyFoundOnNode.contains(instance.getTypeDefinition().getName())) {
+                        val = val + 1;
+                        alreadyFoundOnNode.add(instance.getTypeDefinition().getName());
+                        counter.put(instance.getTypeDefinition().getName(), val);
+                    }
                 }
             }
         }
