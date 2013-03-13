@@ -44,7 +44,7 @@ public class AddVirtualNodeOperator extends AbstractKevoreeOperator {
         return selectedNodes;
     }
 
-    private Integer resolveDictionaryValue(TypeDefinition td) {
+    protected Integer resolveDictionaryValue(TypeDefinition td) {
         Integer cacheValue = vCPUCache.get(td);
         if (cacheValue == null) {
             for (DictionaryValue v : td.getDictionaryType().getDefaultValues()) {

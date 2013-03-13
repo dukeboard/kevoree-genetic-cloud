@@ -14,10 +14,6 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
     private static Integer numberOfInfraNode_lowPower = 3;
     private static Integer numberOfInfraNode_fullPower = 2;
 
-    private static Integer numberOfCustomerNode = 5;
-    private static Integer numberOfSoftwareComp = 4;
-    private final String propertyName = "CPU_FREQUENCY";
-
     @Override
     public List<ContainerRoot> createPopulation() {
         ArrayList<ContainerRoot> population = new ArrayList<ContainerRoot>();

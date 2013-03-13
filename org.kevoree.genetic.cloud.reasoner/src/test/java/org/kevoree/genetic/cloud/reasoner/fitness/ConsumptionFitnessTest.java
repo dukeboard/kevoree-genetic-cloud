@@ -47,7 +47,6 @@ public class ConsumptionFitnessTest {
             }
         }
         double d3 = fitness.evaluate(model);
-        System.out.println(d3);
         assert (d3 < 70d && d3 > 30d);
     }
 
