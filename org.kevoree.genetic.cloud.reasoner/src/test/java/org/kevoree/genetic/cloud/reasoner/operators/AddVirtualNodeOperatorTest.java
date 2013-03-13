@@ -3,7 +3,6 @@ package org.kevoree.genetic.cloud.reasoner.operators;
 import org.junit.Test;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
-import org.kevoree.genetic.cloud.reasoner.org.kevoree.genetic.cloud.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
 
 import java.util.List;

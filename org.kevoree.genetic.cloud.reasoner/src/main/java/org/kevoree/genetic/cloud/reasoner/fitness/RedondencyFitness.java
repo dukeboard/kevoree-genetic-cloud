@@ -3,7 +3,9 @@ package org.kevoree.genetic.cloud.reasoner.fitness;
 import org.kevoree.*;
 import org.kevoree.genetic.framework.KevoreeFitnessFunction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,26 +17,38 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
 
     private Integer globalRedondency = 5; //MAGIC NUMBER !!!
 
+    private List<String> types = new ArrayList<String>();
+
+    public RedondencyFitness addType(String t) {
+        types.add(t);
+        return this;
+    }
+
+    public RedondencyFitness setAllTypes(List<String> _types) {
+        types = _types;
+        return this;
+    }
+
     @Override
     public double evaluate(ContainerRoot model) {
         HashMap<String, Integer> counter = new HashMap<String, Integer>();
         //INITIATE with all TD of components
-        for (TypeDefinition td : model.getTypeDefinitions()) {
-            if (td instanceof ComponentType) {
-                counter.put(td.getName(), 0);
-            }
+        for (String tdName : types) {
+            counter.put(tdName, 0);
         }
         for (ContainerNode node : model.getNodes()) {
             for (ComponentInstance instance : node.getComponents()) {
                 Integer val = counter.get(instance.getTypeDefinition().getName());
-                val = val + 1;
-                counter.put(instance.getTypeDefinition().getName(), val);
+                if (val != null) {
+                    val = val + 1;
+                    counter.put(instance.getTypeDefinition().getName(), val);
+                }
             }
         }
-
-        System.out.println(counter);
-
         Integer maxRedondency = globalRedondency * counter.size();
+        if (maxRedondency == 0) {
+            return 0.0d;
+        }
         Integer globalScore = 0;
         for (String key : counter.keySet()) {
             globalScore += (globalRedondency - counter.get(key));

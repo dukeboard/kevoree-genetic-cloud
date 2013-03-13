@@ -1,4 +1,4 @@
-package org.kevoree.genetic.cloud.reasoner.org.kevoree.genetic.cloud.operators;
+package org.kevoree.genetic.cloud.reasoner.operators;
 
 import org.kevoree.*;
 import org.kevoree.genetic.library.operator.AbstractKevoreeOperator;

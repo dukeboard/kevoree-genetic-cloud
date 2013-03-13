@@ -19,6 +19,10 @@ public class RedondencyFitnessTest {
 
     @Test
     public void testRedondency() {
+
+        fitness = fitness.addType("ItemDB").addType("LoadBalancer").addType("PaymentDB").addType("UserDB").addType("WebFrontend");
+
+
         CloudPopulationFactory factory = new CloudPopulationFactory();
         List<ContainerRoot> models = factory.createPopulation();
         ContainerRoot model = models.get(0);
@@ -26,7 +30,7 @@ public class RedondencyFitnessTest {
         assert (d == 100.0d); //Check bad score because no redondency
         populateComponentOnce(model);
         double d2 = fitness.evaluate(model);
-        System.out.println(d2);
+        assert (d2 == 0.0d); //Check bad score because no redondency
     }
 
     public void populateComponentOnce(ContainerRoot model) {
@@ -49,6 +53,5 @@ public class RedondencyFitnessTest {
             }
         }
     }
-
 
 }
