@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class RedondencyFitness implements KevoreeFitnessFunction {
 
-    private Integer globalRedondency = 5; //MAGIC NUMBER !!!
-
+    private final String nbSubNodes = "vcpu";
+    private HashMap<TypeDefinition, Integer> vCPUCache = new HashMap<TypeDefinition, Integer>();
     private List<String> types = new ArrayList<String>();
 
     public RedondencyFitness addType(String t) {
@@ -32,11 +32,23 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
     @Override
     public double evaluate(ContainerRoot model) {
         HashMap<String, Integer> counter = new HashMap<String, Integer>();
+
+        Integer totalVCPUcapacity = 0;
         //INITIATE with all TD of components
         for (String tdName : types) {
             counter.put(tdName, 0);
         }
+        Integer inodeCounter = 0;
         for (ContainerNode node : model.getNodes()) {
+            if (node.getHost() == null) {
+                inodeCounter = inodeCounter + 1;
+            }
+
+            Integer vcpu = resolveDictionaryValue(node.getTypeDefinition());
+            if(vcpu != null){
+                totalVCPUcapacity += vcpu;
+            }
+
             List<String> alreadyFoundOnNode = new ArrayList<String>();
             for (ComponentInstance instance : node.getComponents()) {
                 Integer val = counter.get(instance.getTypeDefinition().getName());
@@ -49,20 +61,39 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
                 }
             }
         }
-        Integer maxRedondency = globalRedondency * counter.size();
+        //Maximal redondency, one component on each CustomerNode
+        double maxRedondency = totalVCPUcapacity * inodeCounter;
         if (maxRedondency == 0) {
             return 0.0d;
         }
-        Integer globalScore = 0;
+        double globalScore = 0d;
         for (String key : counter.keySet()) {
-            globalScore += (globalRedondency - counter.get(key));
+            double localCounter = counter.get(key);
+            double localPercentage = (localCounter / maxRedondency) * 100;
+            globalScore = globalScore + (100-localPercentage);
         }
-        return globalScore / maxRedondency * 100;
+        return globalScore / types.size();
     }
 
     @Override
     public String getName() {
         return "Redundancy_Fitness";
+    }
+
+    protected Integer resolveDictionaryValue(TypeDefinition td) {
+        Integer cacheValue = vCPUCache.get(td);
+        if (cacheValue == null) {
+            for (DictionaryValue v : td.getDictionaryType().getDefaultValues()) {
+                if (v.getAttribute().getName().equals(nbSubNodes)) {
+                    cacheValue = Integer.parseInt(v.getValue());
+                }
+            }
+        }
+        if (cacheValue == null) {
+            cacheValue = 0;
+        }
+        vCPUCache.put(td, cacheValue);
+        return cacheValue;
     }
 
 }

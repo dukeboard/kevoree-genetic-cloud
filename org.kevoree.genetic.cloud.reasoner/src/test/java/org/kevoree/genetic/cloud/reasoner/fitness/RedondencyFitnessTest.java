@@ -30,7 +30,7 @@ public class RedondencyFitnessTest {
         assert (d == 100.0d); //Check bad score because no redondency
         populateComponentOnce(model);
         double d2 = fitness.evaluate(model);
-        assert (d2 == 0.0d); //Check bad score because no redondency
+        assert (d2 <67d && d2 >66); //Check bad score because no redondency
     }
 
     public void populateComponentOnce(ContainerRoot model) {
