@@ -1,17 +1,15 @@
 package org.kevoree.genetic.cloud.reasoner;
 
 import org.kevoree.genetic.cloud.reasoner.fitness.ConsumptionFitness;
-import org.kevoree.genetic.cloud.reasoner.fitness.EmptySlotFitness;
 import org.kevoree.genetic.cloud.reasoner.fitness.IsolationFitness;
+import org.kevoree.genetic.cloud.reasoner.fitness.MaximizeChildNodesFitness;
 import org.kevoree.genetic.cloud.reasoner.fitness.RedondencyFitness;
 import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.OptimizeRedondencyOperator;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
 import org.kevoree.genetic.framework.KevoreeGeneticEngine;
 import org.kevoree.genetic.framework.KevoreeSolution;
-import org.kevoree.genetic.library.operator.MoveNode;
 import org.kevoree.genetic.library.operator.RemoveChildNode;
-import org.kevoree.genetic.library.operator.RemoveComponent;
 
 import java.util.List;
 
@@ -28,14 +26,14 @@ public class RunnerOptimizeConsumption {
         engine.addOperator(operator);
         engine.addOperator(new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]"));
         //engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[{name=*}]/hosts[{name=*}]/components[{name=*}]"));
-        //engine.addOperator(new RemoveChildNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
+        engine.addOperator(new RemoveChildNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
         //engine.addOperator(new MoveNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
 
         /* Configure fitness */
         engine.addFitnessFuntion(new ConsumptionFitness());
         engine.addFitnessFuntion(new IsolationFitness());
         engine.addFitnessFuntion(new RedondencyFitness().setAllTypes(operator.getAllTypes()));
-        engine.addFitnessFuntion(new EmptySlotFitness());
+        engine.addFitnessFuntion(new MaximizeChildNodesFitness());
 
 
         engine.setMaxGeneration(1000);
