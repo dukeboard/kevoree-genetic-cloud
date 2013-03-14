@@ -9,7 +9,9 @@ import org.kevoree.genetic.cloud.reasoner.operators.OptimizeRedondencyOperator;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
 import org.kevoree.genetic.framework.KevoreeGeneticEngine;
 import org.kevoree.genetic.framework.KevoreeSolution;
+import org.kevoree.genetic.library.operator.MoveNode;
 import org.kevoree.genetic.library.operator.RemoveChildNode;
+import org.kevoree.genetic.library.operator.RemoveComponent;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class RunnerOptimizeConsumption {
         operator.setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
         engine.addOperator(operator);
         engine.addOperator(new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]"));
-        //engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[{name=*}]/hosts[{name=*}]/components[{name=*}]"));
+        engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[{name=*}]/hosts[{name=*}]/components[{name=*}]"));
         engine.addOperator(new RemoveChildNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
         //engine.addOperator(new MoveNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
 

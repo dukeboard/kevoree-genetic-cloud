@@ -62,7 +62,7 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
             }
         }
         //Maximal redondency, one component on each CustomerNode
-        double maxRedondency = totalVCPUcapacity * inodeCounter;
+        double maxRedondency = (totalVCPUcapacity/2) * inodeCounter;
         if (maxRedondency == 0) {
             return 0.0d;
         }
@@ -72,7 +72,7 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
             double localPercentage = (localCounter / maxRedondency) * 100;
             globalScore = globalScore + (100-localPercentage);
         }
-        return globalScore / types.size();
+        return globalScore / counter.size();
     }
 
     @Override
