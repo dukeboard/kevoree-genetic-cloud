@@ -7,7 +7,6 @@ import org.kevoree.KevoreeFactory;
 import org.kevoree.genetic.cloud.reasoner.fitness.RedondencyFitness;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
 import org.kevoree.impl.DefaultKevoreeFactory;
-import org.kevoree.serializer.ModelSerializer;
 
 import java.util.List;
 import java.util.Random;

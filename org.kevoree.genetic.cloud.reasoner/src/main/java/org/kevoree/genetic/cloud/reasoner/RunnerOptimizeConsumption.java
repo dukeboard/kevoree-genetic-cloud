@@ -1,12 +1,12 @@
 package org.kevoree.genetic.cloud.reasoner;
 
 import org.kevoree.genetic.cloud.reasoner.fitness.*;
+import org.kevoree.genetic.cloud.reasoner.fitness.RedondencyFitness;
 import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.OptimizeRedondencyOperator;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
 import org.kevoree.genetic.framework.KevoreeGeneticEngine;
 import org.kevoree.genetic.framework.KevoreeSolution;
-import org.kevoree.genetic.library.operator.MoveNode;
 import org.kevoree.genetic.library.operator.RemoveChildNode;
 import org.kevoree.genetic.library.operator.RemoveComponent;
 
@@ -30,10 +30,11 @@ public class RunnerOptimizeConsumption {
 
         /* Configure fitness */
         engine.addFitnessFuntion(new ConsumptionFitness());
-        engine.addFitnessFuntion(new IsolationFitness());
+        //engine.addFitnessFuntion(new IsolationFitness());
         engine.addFitnessFuntion(new RedondencyFitness().setAllTypes(operator.getAllTypes()));
         //engine.addFitnessFuntion(new MaximizeChildNodesFitness());
         engine.addFitnessFuntion(new CompletenessFitness().setAllTypes(operator.getAllTypes()));
+        engine.addFitnessFuntion(new SecurityFitness());
 
         engine.setMaxGeneration(1000);
         long currentTime = System.currentTimeMillis();
