@@ -23,8 +23,8 @@ public class RunnerOptimizeConsumption {
         operator.addType("ItemDB").addType("LoadBalancer").addType("PaymentDB").addType("UserDB").addType("WebFrontend");
         operator.setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
         engine.addOperator(operator);
-        engine.addOperator(new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]"));
-        engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[{name=*}]/hosts[{name=*}]/components[{name=*}]"));
+        engine.addOperator(new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]").setSuccessor(operator));
+        engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[*]/hosts[*]/components[*]"));
         engine.addOperator(new RemoveChildNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
         //engine.addOperator(new MoveNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
 
@@ -32,16 +32,16 @@ public class RunnerOptimizeConsumption {
         engine.addFitnessFuntion(new ConsumptionFitness());
         engine.addFitnessFuntion(new IsolationFitness());
         engine.addFitnessFuntion(new RedondencyFitness().setAllTypes(operator.getAllTypes()));
-        engine.addFitnessFuntion(new MaximizeChildNodesFitness());
+        //engine.addFitnessFuntion(new MaximizeChildNodesFitness());
         engine.addFitnessFuntion(new CompletenessFitness().setAllTypes(operator.getAllTypes()));
-
 
         engine.setMaxGeneration(1000);
         long currentTime = System.currentTimeMillis();
         List<KevoreeSolution> result = engine.solve();
         System.out.println("Found solutions in " + (System.currentTimeMillis() - currentTime) + " ms");
         SolutionFilter filter = new SolutionFilter();
-        for (KevoreeSolution solution : filter.filterSolution(result)) {
+
+        for (KevoreeSolution solution : filter.order(filter.filterSolution(result))) {
             solution.print(System.out);
         }
     }

@@ -31,7 +31,7 @@ public class CompletenessFitness implements KevoreeFitnessFunction {
     @Override
     public double evaluate(ContainerRoot model) {
         HashMap<String, Double> map = new HashMap<String, Double>();
-        List<Object> components = model.selectByQuery("nodes[{name=*}/hosts[{name=*}]/components[{name=*}]");
+        List<Object> components = model.selectByQuery("nodes[*]/hosts[*]/components[*]");
         Double completeness = 100d;
         for (String tdName : types) {
             map.put(tdName, 0d);
