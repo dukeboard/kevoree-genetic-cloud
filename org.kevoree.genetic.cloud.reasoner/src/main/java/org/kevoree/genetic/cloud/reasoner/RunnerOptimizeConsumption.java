@@ -1,9 +1,6 @@
 package org.kevoree.genetic.cloud.reasoner;
 
-import org.kevoree.genetic.cloud.reasoner.fitness.ConsumptionFitness;
-import org.kevoree.genetic.cloud.reasoner.fitness.IsolationFitness;
-import org.kevoree.genetic.cloud.reasoner.fitness.MaximizeChildNodesFitness;
-import org.kevoree.genetic.cloud.reasoner.fitness.RedondencyFitness;
+import org.kevoree.genetic.cloud.reasoner.fitness.*;
 import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.OptimizeRedondencyOperator;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
@@ -36,13 +33,15 @@ public class RunnerOptimizeConsumption {
         engine.addFitnessFuntion(new IsolationFitness());
         engine.addFitnessFuntion(new RedondencyFitness().setAllTypes(operator.getAllTypes()));
         engine.addFitnessFuntion(new MaximizeChildNodesFitness());
+        engine.addFitnessFuntion(new CompletenessFitness().setAllTypes(operator.getAllTypes()));
 
 
         engine.setMaxGeneration(1000);
         long currentTime = System.currentTimeMillis();
         List<KevoreeSolution> result = engine.solve();
         System.out.println("Found solutions in " + (System.currentTimeMillis() - currentTime) + " ms");
-        for (KevoreeSolution solution : result) {
+        SolutionFilter filter = new SolutionFilter();
+        for (KevoreeSolution solution : filter.filterSolution(result)) {
             solution.print(System.out);
         }
     }

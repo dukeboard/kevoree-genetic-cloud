@@ -15,8 +15,6 @@ import java.util.List;
  */
 public class RedondencyFitness implements KevoreeFitnessFunction {
 
-    private final String nbSubNodes = "vcpu";
-    private HashMap<TypeDefinition, Integer> vCPUCache = new HashMap<TypeDefinition, Integer>();
     private List<String> types = new ArrayList<String>();
 
     public RedondencyFitness addType(String t) {
@@ -29,8 +27,42 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
         return this;
     }
 
+    private Integer maxRedondency = 5;
+
+    public Integer getMaxRedondency() {
+        return maxRedondency;
+    }
+
+    public RedondencyFitness setMaxRedondency(Integer maxRedondency) {
+        this.maxRedondency = maxRedondency;
+        return this;
+    }
+
     @Override
     public double evaluate(ContainerRoot model) {
+        HashMap<String, Double> map = new HashMap<String, Double>();
+        List<Object> components = model.selectByQuery("nodes[{name=*}/hosts[{name=*}]/components[{name=*}]");
+        Double redondency = 100d;
+        for (String tdName : types) {
+            map.put(tdName, 0d);
+        }
+        for (Object o : components) {
+            ComponentInstance ci = (ComponentInstance) o;
+            map.put(ci.getTypeDefinition().getName(), map.get(ci.getTypeDefinition().getName()) + 1);
+        }
+        for (Object key : map.keySet()) {
+            Double nbVal = map.get(key);
+            if(nbVal > 1){
+                Double localPercent = nbVal / maxRedondency * 100d;
+                redondency = redondency - (localPercent / types.size());
+            }
+        }
+        return Math.abs(redondency);
+
+
+
+          /*
+
         HashMap<String, Integer> counter = new HashMap<String, Integer>();
 
         Integer totalVCPUcapacity = 0;
@@ -62,7 +94,7 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
             }
         }
         //Maximal redondency, one component on each CustomerNode
-        double maxRedondency = (totalVCPUcapacity/2) * inodeCounter;
+        double maxRedondency = 3;//(totalVCPUcapacity/2) * inodeCounter;
         if (maxRedondency == 0) {
             return 0.0d;
         }
@@ -72,7 +104,7 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
             double localPercentage = (localCounter / maxRedondency) * 100;
             globalScore = globalScore + (100-localPercentage);
         }
-        return globalScore / counter.size();
+        return globalScore / counter.size();*/
     }
 
     @Override
@@ -80,6 +112,7 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
         return "Redundancy_Fitness";
     }
 
+    /*
     protected Integer resolveDictionaryValue(TypeDefinition td) {
         Integer cacheValue = vCPUCache.get(td);
         if (cacheValue == null) {
@@ -94,6 +127,6 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
         }
         vCPUCache.put(td, cacheValue);
         return cacheValue;
-    }
+    }  */
 
 }

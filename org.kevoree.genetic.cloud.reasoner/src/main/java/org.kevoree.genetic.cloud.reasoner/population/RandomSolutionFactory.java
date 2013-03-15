@@ -1,25 +1,26 @@
 package org.kevoree.genetic.cloud.reasoner.population;
 
 import org.kevoree.*;
-import org.kevoree.cloner.ModelCloner;
-import org.kevoree.genetic.framework.KevoreePopulationFactory;
 import org.kevoree.impl.DefaultKevoreeFactory;
 import org.kevoree.loader.ModelLoader;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
-public class CloudPopulationFactory implements KevoreePopulationFactory {
+/**
+ * Created with IntelliJ IDEA.
+ * User: duke
+ * Date: 15/03/13
+ * Time: 11:12
+ */
+public class RandomSolutionFactory {
 
+    private KevoreeFactory factory = new DefaultKevoreeFactory();
     private static Integer numberOfInfraNode_lowPower = 3;
     private static Integer numberOfInfraNode_fullPower = 2;
+    private Random rand = new Random();
 
-    @Override
-    public List<ContainerRoot> createPopulation() {
-        ArrayList<ContainerRoot> population = new ArrayList<ContainerRoot>();
-        KevoreeFactory factory = new DefaultKevoreeFactory();
+    public void createRandomSolution() {
         ModelLoader loader = new ModelLoader();
-        ModelCloner cloner = new ModelCloner();
         ContainerRoot rootModel = loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
         /* Fix Immutable */
         for (TypeDefinition td : rootModel.getTypeDefinitions()) {
@@ -31,7 +32,7 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
         for (Repository r : rootModel.getRepositories()) {
             r.setRecursiveReadOnly();
         }
-
+        //Init Infra
         //Fill Customer LowPowerNode
         for (int i = 0; i < numberOfInfraNode_lowPower; i++) {
             ContainerNode node = factory.createContainerNode();
@@ -39,7 +40,6 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
             node.setTypeDefinition(rootModel.findTypeDefinitionsByID("ARMInfraNode"));
             rootModel.addNodes(node);
         }
-
         //Fill Customer FullPowerNode
         for (int i = 0; i < numberOfInfraNode_fullPower; i++) {
             ContainerNode node = factory.createContainerNode();
@@ -48,10 +48,6 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
             rootModel.addNodes(node);
         }
 
-        //Fill the whole population
-        for (int i = 0; i < 10; i++) {
-            population.add(cloner.cloneMutableOnly(rootModel, false));
-        }
-        return population;
     }
+
 }
