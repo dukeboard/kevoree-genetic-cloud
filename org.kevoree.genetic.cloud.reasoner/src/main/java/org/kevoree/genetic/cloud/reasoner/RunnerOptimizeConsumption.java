@@ -30,11 +30,10 @@ public class RunnerOptimizeConsumption {
 
         /* Configure fitness */
         engine.addFitnessFuntion(new ConsumptionFitness());
-        //engine.addFitnessFuntion(new IsolationFitness());
         engine.addFitnessFuntion(new RedondencyFitness().setAllTypes(operator.getAllTypes()));
-        //engine.addFitnessFuntion(new MaximizeChildNodesFitness());
         engine.addFitnessFuntion(new CompletenessFitness().setAllTypes(operator.getAllTypes()));
         engine.addFitnessFuntion(new SecurityFitness());
+        engine.addFitnessFuntion(new OverloadFitness());
 
         engine.setMaxGeneration(1000);
         long currentTime = System.currentTimeMillis();

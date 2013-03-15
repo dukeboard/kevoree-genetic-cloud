@@ -30,9 +30,9 @@ public class RunnerRandomSolution {
 
         /* Configure fitness */
         engine.addFitnessFuntion(new ConsumptionFitness());
-        engine.addFitnessFuntion(new IsolationFitness());
+        //engine.addFitnessFuntion(new IsolationFitness());
         engine.addFitnessFuntion(new RedondencyFitness().setAllTypes(operator.getAllTypes()));
-        engine.addFitnessFuntion(new MaximizeChildNodesFitness());
+        //engine.addFitnessFuntion(new MaximizeChildNodesFitness());
         engine.addFitnessFuntion(new CompletenessFitness().setAllTypes(operator.getAllTypes()));
 
 

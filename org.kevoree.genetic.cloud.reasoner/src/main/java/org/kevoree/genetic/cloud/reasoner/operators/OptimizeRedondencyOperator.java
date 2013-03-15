@@ -35,7 +35,7 @@ public class OptimizeRedondencyOperator extends AbstractKevoreeOperator {
         return types;
     }
 
-    private Integer globalRedondency = 5; //MAGIC NUMBER !!!
+    //private Integer globalRedondency = 5; //MAGIC NUMBER !!!
 
     @Override
     protected void applyMutation(Object target, ContainerRoot model) {
@@ -71,9 +71,9 @@ public class OptimizeRedondencyOperator extends AbstractKevoreeOperator {
                 inst.setTypeDefinition(td);
 
                 ContainerNode targetNode = (ContainerNode) target;
-                if(targetNode.getComponents().size() < globalRedondency){
+                //if(targetNode.getComponents().size() < globalRedondency){
                     targetNode.addComponents(inst);
-                }
+                //}
             }
         }
     }

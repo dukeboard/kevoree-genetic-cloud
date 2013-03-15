@@ -6,7 +6,8 @@ import org.kevoree.framework.AbstractComponentType;
 @Library(name = "Snt-Cloud")
 @ComponentType
 @DictionaryType({
-        @DictionaryAttribute(name = "securityLevel", defaultValue = "3", optional = true)
+        @DictionaryAttribute(name = "securityLevel", defaultValue = "3", optional = true),
+        @DictionaryAttribute(name = "vcpu_load", defaultValue = "0.25", optional = true)
 })
 @Requires({
         @RequiredPort(name="outgoingConnection", type = PortType.MESSAGE, optional = true)

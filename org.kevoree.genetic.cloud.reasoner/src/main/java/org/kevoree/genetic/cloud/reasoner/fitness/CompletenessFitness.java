@@ -48,6 +48,6 @@ public class CompletenessFitness implements KevoreeFitnessFunction {
 
     @Override
     public String getName() {
-        return "Completeness_Fitness";
+        return CompletenessFitness.class.getSimpleName();
     }
 }

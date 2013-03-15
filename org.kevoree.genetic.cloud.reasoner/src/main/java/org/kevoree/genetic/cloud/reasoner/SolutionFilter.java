@@ -1,5 +1,6 @@
 package org.kevoree.genetic.cloud.reasoner;
 
+import org.kevoree.genetic.cloud.reasoner.fitness.CompletenessFitness;
 import org.kevoree.genetic.framework.KevoreeSolution;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class SolutionFilter {
     public List<KevoreeSolution> filterSolution(List<KevoreeSolution> solutions) {
         List<KevoreeSolution> result = new ArrayList<KevoreeSolution>();
         for (KevoreeSolution solution : solutions) {
-            if (solution.getResultFromFitness("Completeness_Fitness") == 0d) {
+            if (solution.getResultFromFitness(CompletenessFitness.class.getSimpleName()) == 0d) {
                 result.add(solution);
             }
         }

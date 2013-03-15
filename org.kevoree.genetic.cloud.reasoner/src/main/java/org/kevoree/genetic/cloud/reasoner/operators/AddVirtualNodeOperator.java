@@ -1,6 +1,7 @@
 package org.kevoree.genetic.cloud.reasoner.operators;
 
 import org.kevoree.*;
+import org.kevoree.genetic.cloud.reasoner.util.PropertyCachedResolver;
 import org.kevoree.genetic.library.operator.AbstractKevoreeOperator;
 import org.kevoree.impl.DefaultKevoreeFactory;
 
@@ -18,9 +19,9 @@ import java.util.Random;
 public class AddVirtualNodeOperator extends AbstractKevoreeOperator {
 
     private final String nbSubNodes = "vcpu";
-    private HashMap<TypeDefinition, Integer> vCPUCache = new HashMap<TypeDefinition, Integer>();
     protected Random rand = new Random();
     private KevoreeFactory factory = new DefaultKevoreeFactory();
+    private PropertyCachedResolver resolver = new PropertyCachedResolver();
 
     @Override
     protected void applyMutation(Object o, ContainerRoot containerRoot) {
@@ -37,27 +38,11 @@ public class AddVirtualNodeOperator extends AbstractKevoreeOperator {
         List<Object> selectedNodes = new ArrayList<Object>();
         for (Object n : nodeList) {
             ContainerNode node = (ContainerNode) n;
-            if (node.getHosts().size() < resolveDictionaryValue(node.getTypeDefinition())) {
+            if (node.getHosts().size() < resolver.getDefault(node, nbSubNodes)) {
                 selectedNodes.add(node);
             }
         }
         return selectedNodes;
-    }
-
-    protected Integer resolveDictionaryValue(TypeDefinition td) {
-        Integer cacheValue = vCPUCache.get(td);
-        if (cacheValue == null) {
-            for (DictionaryValue v : td.getDictionaryType().getDefaultValues()) {
-                if (v.getAttribute().getName().equals(nbSubNodes)) {
-                    cacheValue = Integer.parseInt(v.getValue());
-                }
-            }
-        }
-        if (cacheValue == null) {
-            cacheValue = 0;
-        }
-        vCPUCache.put(td, cacheValue);
-        return cacheValue;
     }
 
 }
