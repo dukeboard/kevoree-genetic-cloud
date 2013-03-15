@@ -88,18 +88,19 @@ public class RandomSolutionFactory {
         }
 
         KevoreeMutationOperator addVirtualNodeOperator = new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]");
-        int nbVNodes = rand.nextInt(vcpuMax);
+        int nbVNodes = 1 + rand.nextInt(vcpuMax-1);
         for(int i = 0; i < nbVNodes ; i++) {
             rootModel = addVirtualNodeOperator.mutate(rootModel);
         }
 
-        List<Object> vNodes = rootModel.selectByQuery("nodes[{ typeDefinition.name = *CustomerNode }");
+        List<Object> vNodes = rootModel.selectByQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
         int redondency = 5;
         for(String type : types) {
             int typeRed = rand.nextInt(redondency);
 
             for(int r = 0; r < typeRed; r++) {
-                ContainerNode node = (ContainerNode)vNodes.get(rand.nextInt(vNodes.size()));
+                int nodeNum = rand.nextInt(vNodes.size());
+                ContainerNode node = (ContainerNode)vNodes.get(nodeNum);
                 TypeDefinition td = rootModel.findTypeDefinitionsByID(type);
                 if (td != null) {
                     ComponentInstance inst = factory.createComponentInstance();
