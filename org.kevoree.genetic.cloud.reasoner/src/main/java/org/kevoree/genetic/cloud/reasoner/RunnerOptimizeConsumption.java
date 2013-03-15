@@ -4,6 +4,7 @@ import org.kevoree.genetic.cloud.reasoner.fitness.*;
 import org.kevoree.genetic.cloud.reasoner.fitness.RedondencyFitness;
 import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.OptimizeRedondencyOperator;
+import org.kevoree.genetic.cloud.reasoner.plot.SolutionPloter;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
 import org.kevoree.genetic.framework.KevoreeGeneticEngine;
 import org.kevoree.genetic.framework.KevoreeSolution;
@@ -37,10 +38,15 @@ public class RunnerOptimizeConsumption {
         engine.addFitnessFuntion(new SecurityFitness());
 
         engine.setMaxGeneration(1000);
+        SolutionPloter ploter = new SolutionPloter();
+        engine.setInstrument(ploter);
+
         long currentTime = System.currentTimeMillis();
         List<KevoreeSolution> result = engine.solve();
         System.out.println("Found solutions in " + (System.currentTimeMillis() - currentTime) + " ms");
         SolutionFilter filter = new SolutionFilter();
+
+        ploter.plotResults();
 
         for (KevoreeSolution solution : filter.order(filter.filterSolution(result))) {
             solution.print(System.out);
