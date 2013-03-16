@@ -28,6 +28,11 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
         this.numberOfInfraNode_fullPower = numberOfInfraNode_fullPower;
     }
 
+    public void scale(int factor) {
+        numberOfInfraNode_lowPower = 3 * factor;
+        numberOfInfraNode_fullPower = 2 * factor;
+    }
+
     @Override
     public List<ContainerRoot> createPopulation() {
         ArrayList<ContainerRoot> population = new ArrayList<ContainerRoot>();
