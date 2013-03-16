@@ -16,10 +16,8 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
     private Integer numberOfInfraNode_fullPower = 2;
 
     public void setNodeSetup(int totalNumberOfNodes, int percentageOfFullPowerMachine) {
-        Random rand = new Random();
-        for(int i = 0; i < totalNumberOfNodes; i++) {
-
-        }
+        setNumberOfInfraNode_fullPower(totalNumberOfNodes/percentageOfFullPowerMachine);
+        setNumberOfInfraNode_lowPower(totalNumberOfNodes-(totalNumberOfNodes/percentageOfFullPowerMachine));
     }
 
     public void setNumberOfInfraNode_lowPower(Integer numberOfInfraNode_lowPower) {
