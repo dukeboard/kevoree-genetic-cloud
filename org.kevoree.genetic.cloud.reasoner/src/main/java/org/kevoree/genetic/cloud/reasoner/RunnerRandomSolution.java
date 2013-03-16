@@ -1,7 +1,6 @@
 package org.kevoree.genetic.cloud.reasoner;
 
 import org.kevoree.ContainerRoot;
-import org.kevoree.genetic.cloud.library.onlineStore.*;
 import org.kevoree.genetic.cloud.reasoner.fitness.*;
 import org.kevoree.genetic.cloud.reasoner.plot.SolutionPloter;
 import org.kevoree.genetic.cloud.reasoner.population.RandomSolutionFactory;
@@ -9,7 +8,6 @@ import org.kevoree.genetic.cloud.reasoner.util.GenResult;
 import org.kevoree.genetic.cloud.reasoner.util.Measure;
 import org.kevoree.genetic.framework.KevoreeCompositeFitnessFunction;
 import org.kevoree.genetic.framework.KevoreeFitnessFunction;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -17,14 +15,8 @@ public class RunnerRandomSolution {
 
     public static void main(String[] args) throws Exception {
 
-        SLAModel SLAModel = new SLAModel();
-        SLAModel.putVCPULoad(ItemDB.class.getSimpleName(), 1.2); //ItemDB  need 2Ghz
-        SLAModel.putVCPULoad(LoadBalancer.class.getSimpleName(), 0.4); //LoadBalancer  need 0.3Ghz
-        SLAModel.putVCPULoad(PaymentDB.class.getSimpleName(), 0.6); //PaymentDB  need 0.6Ghz
-        SLAModel.putVCPULoad(UserDB.class.getSimpleName(), 0.4); //UserDB  need 0.4Ghz
-        SLAModel.putVCPULoad(WebFrontend.class.getSimpleName(), 1.2); //WebFrontend  need 2Ghz+
-
-        RandomSolutionFactory solutionFactory = new RandomSolutionFactory(SLAModel);
+        RandomSolutionFactory solutionFactory = new RandomSolutionFactory();
+        solutionFactory.addType("ItemDB").addType("LoadBalancer").addType("PaymentDB").addType("UserDB").addType("WebFrontend");
 
         KevoreeCompositeFitnessFunction compositeFunction = new KevoreeCompositeFitnessFunction();
 
@@ -33,17 +25,16 @@ public class RunnerRandomSolution {
         ConsumptionFitness consumptionFitness = new ConsumptionFitness();
         fintessNames.put(consumptionFitness.getName(), consumptionFitness);
         compositeFunction.addFitness(consumptionFitness);
-        CompletenessFitness completenessFitness = new CompletenessFitness().setSlaModel(SLAModel);
-        fintessNames.put(completenessFitness.getName(), completenessFitness);
-        compositeFunction.addFitness(completenessFitness);
+        //RedondencyFitness redondencyFitness = new RedondencyFitness().setAllTypes(solutionFactory.getAllTypes());
+        //fintessNames.put(redondencyFitness.getName(), redondencyFitness);
+        //compositeFunction.addFitness(redondencyFitness);
+        //CompletenessFitness completenessFitness = new CompletenessFitness().setAllTypes(solutionFactory.getAllTypes());
+        //fintessNames.put(completenessFitness.getName(), completenessFitness);
+        //compositeFunction.addFitness(completenessFitness);
         SecurityFitness securityFitness = new SecurityFitness();
         fintessNames.put(securityFitness.getName(), securityFitness);
         compositeFunction.addFitness(securityFitness);
-        OverloadFitness overload = new OverloadFitness();
-        fintessNames.put(overload.getName(), overload);
-        compositeFunction.addFitness(overload);
         fintessNames.put("mean", compositeFunction);
-
 
         SolutionPloter ploter = new SolutionPloter();
         LinkedList<GenResult> result = new LinkedList<GenResult>();
