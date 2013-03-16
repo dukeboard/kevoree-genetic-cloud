@@ -32,11 +32,9 @@ public class AddVirtualNodeOperator extends AbstractKevoreeOperator {
         ContainerNode parent = (ContainerNode) o;
         parent.addHosts(node);
         containerRoot.addNodes(node);
-
-       //((AbstractKevoreeOperator)getSuccessor()).setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
-        ((AbstractKevoreeOperator)getSuccessor()).setSelectorQuery(node.path());
-
-
+        if (getSuccessor() != null) {
+            ((AbstractKevoreeOperator) getSuccessor()).setSelectorQuery(node.path());
+        }
     }
 
     protected List<Object> selectTarget(ContainerRoot root, String query) {
