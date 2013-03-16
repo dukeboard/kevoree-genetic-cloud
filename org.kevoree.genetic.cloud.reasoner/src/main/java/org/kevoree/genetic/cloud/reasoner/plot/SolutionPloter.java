@@ -34,9 +34,13 @@ public class SolutionPloter implements KevoreeEngineInstrument {
 
     HashMap<String, LinkedList<Measure>> timeResults = new HashMap<String, LinkedList<Measure>>();
 
-    private long baseTimestamp = System.currentTimeMillis();
+    private long baseTimestamp = -1;
 
     public void processResult(List<KevoreeSolution> kevoreeSolutions) {
+        if(baseTimestamp == -1){
+            baseTimestamp = System.currentTimeMillis();
+        }
+
         long calltime = System.currentTimeMillis() - baseTimestamp;
         if (!kevoreeSolutions.isEmpty()) {
             SolutionFilter filter = new SolutionFilter();
