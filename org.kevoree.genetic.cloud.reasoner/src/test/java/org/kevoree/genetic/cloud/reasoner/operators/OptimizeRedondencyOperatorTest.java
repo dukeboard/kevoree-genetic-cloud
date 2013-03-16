@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.KevoreeFactory;
-import org.kevoree.genetic.cloud.reasoner.fitness.RedondencyFitness;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
 import org.kevoree.impl.DefaultKevoreeFactory;
 

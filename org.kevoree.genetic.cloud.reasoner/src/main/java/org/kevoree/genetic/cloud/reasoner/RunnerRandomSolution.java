@@ -1,6 +1,5 @@
 package org.kevoree.genetic.cloud.reasoner;
 
-import com.sun.deploy.util.OrderedHashSet;
 import org.kevoree.ContainerRoot;
 import org.kevoree.genetic.cloud.reasoner.fitness.*;
 import org.kevoree.genetic.cloud.reasoner.plot.SolutionPloter;
@@ -9,11 +8,8 @@ import org.kevoree.genetic.cloud.reasoner.util.GenResult;
 import org.kevoree.genetic.cloud.reasoner.util.Measure;
 import org.kevoree.genetic.framework.KevoreeCompositeFitnessFunction;
 import org.kevoree.genetic.framework.KevoreeFitnessFunction;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 public class RunnerRandomSolution {
 

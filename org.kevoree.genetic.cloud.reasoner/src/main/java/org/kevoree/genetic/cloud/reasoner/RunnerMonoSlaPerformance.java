@@ -2,7 +2,6 @@ package org.kevoree.genetic.cloud.reasoner;
 
 import org.kevoree.genetic.cloud.library.onlineStore.*;
 import org.kevoree.genetic.cloud.reasoner.fitness.*;
-import org.kevoree.genetic.cloud.reasoner.operators.AddRandomComponentOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.AddRandomComponentOperatorNoOverLoad;
 import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.MoveVirtualNodeOperator;

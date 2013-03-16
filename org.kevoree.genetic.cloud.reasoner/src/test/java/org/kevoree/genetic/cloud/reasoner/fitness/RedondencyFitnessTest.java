@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class RedondencyFitnessTest {
 
-    private RedondencyFitness fitness = new RedondencyFitness();
+   // private RedondencyFitness fitness = new RedondencyFitness();
     /*
     @Test
     public void testRedondency() {
