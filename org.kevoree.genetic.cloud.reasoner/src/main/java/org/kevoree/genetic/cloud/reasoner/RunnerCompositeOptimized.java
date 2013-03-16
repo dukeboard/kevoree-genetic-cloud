@@ -10,6 +10,8 @@ public class RunnerCompositeOptimized {
 
     public static void main(String[] args) throws Exception {
         RunnerOptimizeConsumption.compositeFitness=true;
+        RunnerOptimizeConsumption.prefixe = "composite";
+        RunnerOptimizeConsumption.scaleFactor = 4d;
         RunnerOptimizeConsumption.main(args);
 
     }

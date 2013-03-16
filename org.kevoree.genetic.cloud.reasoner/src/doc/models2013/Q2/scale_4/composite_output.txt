@@ -1,0 +1,98 @@
+/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java -Didea.launcher.port=7541 "-Didea.launcher.bin.path=/Applications/IntelliJ IDEA 12 CE.app/bin" -Dfile.encoding=UTF-8 -classpath "/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/deploy.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/dt.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/javaws.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/jce.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/jconsole.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/management-agent.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/plugin.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/sa-jdi.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/charsets.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsse.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/apple_provider.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/dnsns.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/localedata.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/sunjce_provider.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/sunpkcs11.jar:/Users/duke/Documents/dev/dukeboard/kevoree-genetic-cloud/org.kevoree.genetic.cloud.reasoner/target/classes:/Users/duke/.m2/repository/org/kevoree/genetic/org.kevoree.genetic.framework/2.0.0-SNAPSHOT/org.kevoree.genetic.framework-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/moea/moea.framework/1.17/moea.framework-1.17.jar:/Users/duke/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar:/Users/duke/.m2/repository/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar:/Users/duke/.m2/repository/commons-codec/commons-codec/1.5/commons-codec-1.5.jar:/Users/duke/.m2/repository/commons-cli/commons-cli/1.2/commons-cli-1.2.jar:/Users/duke/.m2/repository/jfree/jfreechart/1.0.0/jfreechart-1.0.0.jar:/Users/duke/.m2/repository/jfree/jcommon/1.0.0/jcommon-1.0.0.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.model/2.0.0-SNAPSHOT/org.kevoree.model-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/fr/inria/jfilter/jfilter-library/1.3-SNAPSHOT/jfilter-library-1.3-SNAPSHOT.jar:/Users/duke/.m2/repository/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2.jar:/Users/duke/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/0.5.162/kotlin-stdlib-0.5.162.jar:/Users/duke/.m2/repository/org/jetbrains/kotlin/kotlin-runtime/0.5.162/kotlin-runtime-0.5.162.jar:/Users/duke/Documents/dev/dukeboard/kevoree-genetic-cloud/org.kevoree.genetic.cloud.library/target/classes:/Users/duke/.m2/repository/org/kevoree/tools/org.kevoree.tools.javase.framework/2.0.0-SNAPSHOT/org.kevoree.tools.javase.framework-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.framework/2.0.0-SNAPSHOT/org.kevoree.framework-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.api/2.0.0-SNAPSHOT/org.kevoree.api-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.model.context/2.0.0-SNAPSHOT/org.kevoree.model.context-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.adaptation.model/2.0.0-SNAPSHOT/org.kevoree.adaptation.model-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.kcl/2.0.0-SNAPSHOT/org.kevoree.kcl-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/scala-lang/scala-library/2.9.2/scala-library-2.9.2.jar:/Users/duke/.m2/repository/org/kevoree/tools/org.kevoree.tools.annotation.api/2.0.0-SNAPSHOT/org.kevoree.tools.annotation.api-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/corelibrary/sky/org.kevoree.library.sky.api/2.0.0-SNAPSHOT/org.kevoree.library.sky.api-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/corelibrary/javase/org.kevoree.library.javase.javaseNode/2.0.0-SNAPSHOT/org.kevoree.library.javase.javaseNode-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.kompare/2.0.0-SNAPSHOT/org.kevoree.kompare-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/jgrapht/jgrapht-jdk1.5/0.7.3/jgrapht-jdk1.5-0.7.3.jar:/Users/duke/.m2/repository/org/kevoree/corelibrary/javase/org.kevoree.library.javase.webserver.tjws/2.0.0-SNAPSHOT/org.kevoree.library.javase.webserver.tjws-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar:/Users/duke/.m2/repository/org/kevoree/corelibrary/javase/org.kevoree.library.javase.webserver.api/2.0.0-SNAPSHOT/org.kevoree.library.javase.webserver.api-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.basechecker/2.0.0-SNAPSHOT/org.kevoree.basechecker-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/json/org.json/chargebee-1.0/org.json-chargebee-1.0.jar:/Applications/IntelliJ IDEA 12 CE.app/lib/idea_rt.jar" com.intellij.rt.execution.application.AppMain org.kevoree.genetic.cloud.reasoner.RunnerCompositeOptimized
+Found solutions in 24474 ms
+RData => /var/folders/dq/_bgn79zj25n9w8jbs3x228l80000gn/T/temp1273956704922942951.r
+Consumption_Fitness->33.69565217391305
+CompletenessFitness->0.0
+SecurityFitness->0.0
+OverloadFitness->0.0
+SLAPerformanceFitness->0.0
+Solution( /Consumption_Fitness/CompletenessFitness/SecurityFitness/OverloadFitness/SLAPerformanceFitness=6.739130434782609 ) / 6.739130434782609
+	Node ARMINode_10 : ARMInfraNode
+	Node ARMINode_9 : ARMInfraNode
+		Node cust-163751986 : XenCustomerNode
+		 - Component PaymentDB_812771690 : PaymentDB
+	Node ARMINode_8 : ARMInfraNode
+		Node cust377067299 : XenCustomerNode
+		 - Component ItemDB_575979537 : ItemDB
+		 - Component ItemDB_1248423051 : ItemDB
+	Node ARMINode_5 : ARMInfraNode
+		Node cust-2016387628 : XenCustomerNode
+		 - Component UserDB_1755194854 : UserDB
+	Node ARMINode_4 : ARMInfraNode
+		Node cust-419072851 : XenCustomerNode
+		 - Component WebFrontend_2065609996 : WebFrontend
+		 - Component WebFrontend_469096825 : WebFrontend
+	Node ARMINode_7 : ARMInfraNode
+		Node cust2002734302 : XenCustomerNode
+		 - Component WebFrontend_794757694 : WebFrontend
+		 - Component WebFrontend_887689215 : WebFrontend
+	Node ARMINode_6 : ARMInfraNode
+		Node cust1318004338 : XenCustomerNode
+		 - Component WebFrontend_1904211606 : WebFrontend
+	Node ARMINode_1 : ARMInfraNode
+		Node cust138227184 : XenCustomerNode
+		 - Component ItemDB_977428504 : ItemDB
+		 - Component ItemDB_1519728052 : ItemDB
+	Node ARMINode_0 : ARMInfraNode
+		Node cust-1397147894 : XenCustomerNode
+		 - Component LoadBalancer_678555374 : LoadBalancer
+		 - Component LoadBalancer_1543266846 : LoadBalancer
+	Node ARMINode_3 : ARMInfraNode
+		Node cust1432882974 : XenCustomerNode
+		 - Component ItemDB_229307639 : ItemDB
+	Node ARMINode_2 : ARMInfraNode
+		Node cust-1300411037 : XenCustomerNode
+		 - Component PaymentDB_280858560 : PaymentDB
+	Node ARMINode_11 : ARMInfraNode
+		Node cust-1602559466 : XenCustomerNode
+		 - Component LoadBalancer_1536159553 : LoadBalancer
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node XeonINode_3 : XeonInfraNode
+	Node XeonINode_2 : XeonInfraNode
+		Node cust-739736024 : XenCustomerNode
+		 - Component LoadBalancer_1080791738 : LoadBalancer
+		 - Component LoadBalancer_1912689941 : LoadBalancer
+		Node cust-1477112704 : XenCustomerNode
+		 - Component PaymentDB_1566916529 : PaymentDB
+		Node cust-1006068861 : XenCustomerNode
+		 - Component ItemDB_2103974491 : ItemDB
+		 - Component ItemDB_1563418879 : ItemDB
+		Node cust-499755592 : XenCustomerNode
+		 - Component PaymentDB_1065462031 : PaymentDB
+		Node cust-542259761 : XenCustomerNode
+		 - Component ItemDB_1034996561 : ItemDB
+		Node cust-167779134 : XenCustomerNode
+		 - Component UserDB_1120472859 : UserDB
+		 - Component UserDB_751739770 : UserDB
+		Node cust155593670 : XenCustomerNode
+		 - Component WebFrontend_1771295007 : WebFrontend
+		 - Component WebFrontend_1458801628 : WebFrontend
+		Node cust-1629406246 : XenCustomerNode
+	Node XeonINode_5 : XeonInfraNode
+	Node XeonINode_4 : XeonInfraNode
+		Node cust-1499341908 : XenCustomerNode
+		 - Component WebFrontend_1437371509 : WebFrontend
+		 - Component WebFrontend_599694767 : WebFrontend
+		Node cust1206137899 : XenCustomerNode
+		 - Component ItemDB_1994338305 : ItemDB
+		 - Component ItemDB_457500049 : ItemDB
+		Node cust1837063484 : XenCustomerNode
+		 - Component LoadBalancer_1170611404 : LoadBalancer
+		 - Component LoadBalancer_1420884636 : LoadBalancer
+		 - Component LoadBalancer_2047014203 : LoadBalancer
+		Node cust368360290 : XenCustomerNode
+		 - Component UserDB_2142350000 : UserDB
+		Node cust2094684815 : XenCustomerNode
+		 - Component ItemDB_1001631763 : ItemDB
+		Node cust-909130867 : XenCustomerNode
+		 - Component WebFrontend_34780579 : WebFrontend
+		Node cust-2039231815 : XenCustomerNode
+		 - Component WebFrontend_1253248398 : WebFrontend
+		 - Component WebFrontend_929565904 : WebFrontend
+		Node cust985022183 : XenCustomerNode
+		 - Component ItemDB_686446472 : ItemDB
+	Node XeonINode_7 : XeonInfraNode
+	Node XeonINode_6 : XeonInfraNode
+
+Process finished with exit code 0

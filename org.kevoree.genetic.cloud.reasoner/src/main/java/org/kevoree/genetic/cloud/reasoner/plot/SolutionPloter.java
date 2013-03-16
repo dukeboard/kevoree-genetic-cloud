@@ -102,8 +102,8 @@ public class SolutionPloter implements KevoreeEngineInstrument {
 
             StringBuffer temp = new StringBuffer();
             StringBuffer temp_time = new StringBuffer();
-            temp.append(prefixe + "_" + fitness + " <- c(");
-            temp_time.append(prefixe + "_" + fitness + "_t <- c(");
+            temp.append(prefixe + "_" + fitness.replace("/","_") + " <- c(");
+            temp_time.append(prefixe + "_" + fitness.replace("/","_") + "_t <- c(");
             LinkedList<Measure> values = timeResults.get(fitness);
             int i = 0;
             for (Measure measure : values) {
@@ -136,7 +136,7 @@ public class SolutionPloter implements KevoreeEngineInstrument {
                 plot = "plot(xlab=\"Time (ms)\",ylab=\"Fitness Score (%)\",ylim=c(0,100),";
             }
 
-            Rbuffer.append(plot + "" + prefixe + "_" + fitness + "_t, " + prefixe + "_" + fitness + ",type=\"l\",col=" + color + ",lwd=" + size + ",main=NULL)\n");
+            Rbuffer.append(plot + "" + prefixe + "_" + fitness.replace("/","_") + "_t, " + prefixe + "_" + fitness.replace("/","_") + ",type=\"l\",col=" + color + ",lwd=" + size + ",main=NULL)\n");
             fitNb++;
         }
 
@@ -146,7 +146,7 @@ public class SolutionPloter implements KevoreeEngineInstrument {
             if (fitNb != 0) {
                 Rbuffer.append(",");
             }
-            Rbuffer.append("\""+fitness+"\"");
+            Rbuffer.append("\""+fitness.replace("/","_")+"\"");
             fitNb++;
         }
         fitNb = 0;

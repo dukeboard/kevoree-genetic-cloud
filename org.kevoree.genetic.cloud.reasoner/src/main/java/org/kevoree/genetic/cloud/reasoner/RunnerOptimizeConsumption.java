@@ -21,7 +21,9 @@ public class RunnerOptimizeConsumption {
 
     public static Boolean compositeFitness = false;
 
-    public static Double scaleFactor = 1d;
+    public static Double scaleFactor = 12d;
+
+    public static String prefixe = "multi";
 
     public static void main(String[] args) throws Exception {
 
@@ -72,7 +74,7 @@ public class RunnerOptimizeConsumption {
 
         engine.setMaxGeneration(2000);
         SolutionPloter ploter = new SolutionPloter();
-        ploter.setPrefixe("multi");
+        ploter.setPrefixe(prefixe);
         engine.setInstrument(ploter);
 
         long currentTime = System.currentTimeMillis();
