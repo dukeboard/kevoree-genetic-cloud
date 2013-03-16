@@ -1,6 +1,7 @@
 package org.kevoree.genetic.cloud.reasoner.population;
 
 import org.kevoree.*;
+import org.kevoree.cloner.ModelCloner;
 import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.framework.KevoreeMutationOperator;
 import org.kevoree.impl.DefaultKevoreeFactory;
@@ -19,9 +20,11 @@ import java.util.Random;
 public class RandomSolutionFactory {
 
     private KevoreeFactory factory = new DefaultKevoreeFactory();
-    private static Integer numberOfInfraNode_lowPower = 3;
-    private static Integer numberOfInfraNode_fullPower = 2;
+    private Integer numberOfInfraNode_lowPower = 3;
+    private Integer numberOfInfraNode_fullPower = 2;
     private Random rand = new Random();
+    private ContainerRoot rootModel;
+    private int vcpuMax = 0;
 
 
     private List<String> types = new ArrayList<String>();
@@ -40,12 +43,17 @@ public class RandomSolutionFactory {
         return types;
     }
 
+    public void setNumberOfInfraNode_lowPower(Integer numberOfInfraNode_lowPower) {
+       this.numberOfInfraNode_lowPower = numberOfInfraNode_lowPower;
+    }
 
+    public void setNumberOfInfraNode_fullPower(Integer numberOfInfraNode_fullPower) {
+        this.numberOfInfraNode_fullPower = numberOfInfraNode_fullPower;
+    }
 
-
-    public ContainerRoot createRandomSolution() {
+    public void createBaseModel() {
         ModelLoader loader = new ModelLoader();
-        ContainerRoot rootModel = loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
+        rootModel = loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
         /* Fix Immutable */
         for (TypeDefinition td : rootModel.getTypeDefinitions()) {
             td.setRecursiveReadOnly();
@@ -58,9 +66,7 @@ public class RandomSolutionFactory {
         }
         //Init Infra
         //Fill Customer LowPowerNode
-
-        int vcpuMax = 0;
-
+        System.out.println("Generation of light nodes");
         for (int i = 0; i < numberOfInfraNode_lowPower; i++) {
             ContainerNode node = factory.createContainerNode();
             node.setName("ARMINode_" + i);
@@ -73,6 +79,7 @@ public class RandomSolutionFactory {
             node.setTypeDefinition(td);
             rootModel.addNodes(node);
         }
+        System.out.println("Generation of full power nodes");
         //Fill Customer FullPowerNode
         for (int i = 0; i < numberOfInfraNode_fullPower; i++) {
             ContainerNode node = factory.createContainerNode();
@@ -86,14 +93,20 @@ public class RandomSolutionFactory {
             node.setTypeDefinition(td);
             rootModel.addNodes(node);
         }
+    }
+
+
+    public ContainerRoot createRandomSolution() {
+        ModelCloner cloner = new ModelCloner();
+        ContainerRoot model = cloner.cloneMutableOnly(rootModel, false);
 
         KevoreeMutationOperator addVirtualNodeOperator = new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]");
         int nbVNodes = 1 + rand.nextInt(vcpuMax-1);
         for(int i = 0; i < nbVNodes ; i++) {
-            rootModel = addVirtualNodeOperator.mutate(rootModel);
+            model = addVirtualNodeOperator.mutate(model);
         }
 
-        List<Object> vNodes = rootModel.selectByQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
+        List<Object> vNodes = model.selectByQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
         int redondency = 5;
         for(String type : types) {
             int typeRed = rand.nextInt(redondency);
@@ -101,7 +114,7 @@ public class RandomSolutionFactory {
             for(int r = 0; r < typeRed; r++) {
                 int nodeNum = rand.nextInt(vNodes.size());
                 ContainerNode node = (ContainerNode)vNodes.get(nodeNum);
-                TypeDefinition td = rootModel.findTypeDefinitionsByID(type);
+                TypeDefinition td = model.findTypeDefinitionsByID(type);
                 if (td != null) {
                     ComponentInstance inst = factory.createComponentInstance();
                     inst.setName(type + "_" + rand.nextInt());
@@ -111,7 +124,7 @@ public class RandomSolutionFactory {
             }
         }
 
-        return rootModel;
+        return model;
 
     }
 
