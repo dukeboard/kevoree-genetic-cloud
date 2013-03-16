@@ -8,11 +8,27 @@ import org.kevoree.loader.ModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CloudPopulationFactory implements KevoreePopulationFactory {
 
-    private static Integer numberOfInfraNode_lowPower = 3;
-    private static Integer numberOfInfraNode_fullPower = 2;
+    private Integer numberOfInfraNode_lowPower = 3;
+    private Integer numberOfInfraNode_fullPower = 2;
+
+    public void setNodeSetup(int totalNumberOfNodes, int percentageOfFullPowerMachine) {
+        Random rand = new Random();
+        for(int i = 0; i < totalNumberOfNodes; i++) {
+
+        }
+    }
+
+    public void setNumberOfInfraNode_lowPower(Integer numberOfInfraNode_lowPower) {
+        this.numberOfInfraNode_lowPower = numberOfInfraNode_lowPower;
+    }
+
+    public void setNumberOfInfraNode_fullPower(Integer numberOfInfraNode_fullPower) {
+        this.numberOfInfraNode_fullPower = numberOfInfraNode_fullPower;
+    }
 
     @Override
     public List<ContainerRoot> createPopulation() {
