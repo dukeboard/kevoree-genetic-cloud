@@ -1,0 +1,30 @@
+Found solutions in 2771 ms
+RData => /var/folders/dq/_bgn79zj25n9w8jbs3x228l80000gn/T/temp1990763498341398869.r
+CompletenessFitness->0.0
+Consumption_Fitness->100.0
+OverloadFitness->24.000000000000004
+SecurityFitness->70.0
+Solution( SLAPerformanceFitness=0.0 ) / 0.0
+	Node XeonINode_1 : XeonInfraNode
+		Node cust-1152147278 : XenCustomerNode
+		 - Component LoadBalancer_1953839818 : LoadBalancer
+		 - Component UserDB_373005522 : UserDB
+		 - Component PaymentDB_1833618332 : PaymentDB
+		Node cust-392949007 : XenCustomerNode
+		 - Component ItemDB_353873740 : ItemDB
+		Node cust797227505 : XenCustomerNode
+		 - Component ItemDB_1706772108 : ItemDB
+	Node XeonINode_0 : XeonInfraNode
+		Node cust-1274241542 : XenCustomerNode
+		 - Component WebFrontend_1364093397 : WebFrontend
+	Node ARMINode_1 : ARMInfraNode
+		Node cust931876213 : XenCustomerNode
+		 - Component WebFrontend_243840766 : WebFrontend
+	Node ARMINode_0 : ARMInfraNode
+		Node cust-971169810 : XenCustomerNode
+		 - Component LoadBalancer_395288952 : LoadBalancer
+		 - Component LoadBalancer_1999548611 : LoadBalancer
+		 - Component WebFrontend_1608178508 : WebFrontend
+	Node ARMINode_2 : ARMInfraNode
+		Node cust438655095 : XenCustomerNode
+		 - Component ItemDB_685501439 : ItemDB
