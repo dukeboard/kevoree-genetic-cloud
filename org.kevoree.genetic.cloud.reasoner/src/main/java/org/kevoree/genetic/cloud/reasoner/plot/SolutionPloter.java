@@ -129,7 +129,6 @@ public class SolutionPloter implements KevoreeEngineInstrument {
             XYSeries series = new XYSeries(fitness);
             LinkedList<Measure> values = timeResults.get(fitness);
             for(Measure measure : values) {
-                System.out.println("" + measure.timestamp + ":" + measure.value);
                 series.add(measure.timestamp, measure.value);
             }
             dataset.addSeries(series);
