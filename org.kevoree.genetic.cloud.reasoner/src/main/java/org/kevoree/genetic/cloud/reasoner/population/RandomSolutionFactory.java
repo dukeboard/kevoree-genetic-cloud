@@ -2,6 +2,7 @@ package org.kevoree.genetic.cloud.reasoner.population;
 
 import org.kevoree.*;
 import org.kevoree.cloner.ModelCloner;
+import org.kevoree.genetic.cloud.reasoner.SLAModel;
 import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.framework.KevoreeMutationOperator;
 import org.kevoree.impl.DefaultKevoreeFactory;
@@ -25,23 +26,12 @@ public class RandomSolutionFactory {
     private Random rand = new Random();
     private ContainerRoot rootModel;
     private int vcpuMax = 0;
+    private SLAModel slaModel;
 
-
-    private List<String> types = new ArrayList<String>();
-
-    public RandomSolutionFactory addType(String t) {
-        types.add(t);
-        return this;
+    public RandomSolutionFactory(SLAModel slaModel) {
+        this.slaModel = slaModel;
     }
 
-    public RandomSolutionFactory setAllTypes(List<String> _types) {
-        types = _types;
-        return this;
-    }
-
-    public List<String> getAllTypes(){
-        return types;
-    }
 
     public void setNumberOfInfraNode_lowPower(Integer numberOfInfraNode_lowPower) {
        this.numberOfInfraNode_lowPower = numberOfInfraNode_lowPower;
@@ -108,7 +98,7 @@ public class RandomSolutionFactory {
 
         List<Object> vNodes = model.selectByQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
         int redondency = 5;
-        for(String type : types) {
+        for(String type : slaModel.getTypes()) {
             int typeRed = rand.nextInt(redondency);
 
             for(int r = 0; r < typeRed; r++) {
