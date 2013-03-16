@@ -1,0 +1,408 @@
+/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/java -Didea.launcher.port=7532 "-Didea.launcher.bin.path=/Applications/IntelliJ IDEA 12 CE.app/bin" -Dfile.encoding=UTF-8 -classpath "/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/deploy.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/dt.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/javaws.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/jce.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/jconsole.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/management-agent.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/plugin.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/sa-jdi.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/charsets.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsse.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/apple_provider.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/dnsns.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/localedata.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/sunjce_provider.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext/sunpkcs11.jar:/Users/duke/Documents/dev/dukeboard/kevoree-genetic-cloud/org.kevoree.genetic.cloud.reasoner/target/classes:/Users/duke/.m2/repository/org/kevoree/genetic/org.kevoree.genetic.framework/2.0.0-SNAPSHOT/org.kevoree.genetic.framework-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/moea/moea.framework/1.17/moea.framework-1.17.jar:/Users/duke/.m2/repository/org/apache/commons/commons-math/2.2/commons-math-2.2.jar:/Users/duke/.m2/repository/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar:/Users/duke/.m2/repository/commons-codec/commons-codec/1.5/commons-codec-1.5.jar:/Users/duke/.m2/repository/commons-cli/commons-cli/1.2/commons-cli-1.2.jar:/Users/duke/.m2/repository/jfree/jfreechart/1.0.0/jfreechart-1.0.0.jar:/Users/duke/.m2/repository/jfree/jcommon/1.0.0/jcommon-1.0.0.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.model/2.0.0-SNAPSHOT/org.kevoree.model-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/fr/inria/jfilter/jfilter-library/1.3-SNAPSHOT/jfilter-library-1.3-SNAPSHOT.jar:/Users/duke/.m2/repository/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2.jar:/Users/duke/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/0.5.162/kotlin-stdlib-0.5.162.jar:/Users/duke/.m2/repository/org/jetbrains/kotlin/kotlin-runtime/0.5.162/kotlin-runtime-0.5.162.jar:/Users/duke/Documents/dev/dukeboard/kevoree-genetic-cloud/org.kevoree.genetic.cloud.library/target/classes:/Users/duke/.m2/repository/org/kevoree/tools/org.kevoree.tools.javase.framework/2.0.0-SNAPSHOT/org.kevoree.tools.javase.framework-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.framework/2.0.0-SNAPSHOT/org.kevoree.framework-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.api/2.0.0-SNAPSHOT/org.kevoree.api-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.model.context/2.0.0-SNAPSHOT/org.kevoree.model.context-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.adaptation.model/2.0.0-SNAPSHOT/org.kevoree.adaptation.model-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.kcl/2.0.0-SNAPSHOT/org.kevoree.kcl-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/scala-lang/scala-library/2.9.2/scala-library-2.9.2.jar:/Users/duke/.m2/repository/org/kevoree/tools/org.kevoree.tools.annotation.api/2.0.0-SNAPSHOT/org.kevoree.tools.annotation.api-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/corelibrary/sky/org.kevoree.library.sky.api/2.0.0-SNAPSHOT/org.kevoree.library.sky.api-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/corelibrary/javase/org.kevoree.library.javase.javaseNode/2.0.0-SNAPSHOT/org.kevoree.library.javase.javaseNode-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.kompare/2.0.0-SNAPSHOT/org.kevoree.kompare-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/jgrapht/jgrapht-jdk1.5/0.7.3/jgrapht-jdk1.5-0.7.3.jar:/Users/duke/.m2/repository/org/kevoree/corelibrary/javase/org.kevoree.library.javase.webserver.tjws/2.0.0-SNAPSHOT/org.kevoree.library.javase.webserver.tjws-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar:/Users/duke/.m2/repository/org/kevoree/corelibrary/javase/org.kevoree.library.javase.webserver.api/2.0.0-SNAPSHOT/org.kevoree.library.javase.webserver.api-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/kevoree/org.kevoree.basechecker/2.0.0-SNAPSHOT/org.kevoree.basechecker-2.0.0-SNAPSHOT.jar:/Users/duke/.m2/repository/org/json/org.json/chargebee-1.0/org.json-chargebee-1.0.jar:/Applications/IntelliJ IDEA 12 CE.app/lib/idea_rt.jar" com.intellij.rt.execution.application.AppMain org.kevoree.genetic.cloud.reasoner.RunnerOptimizeConsumption
+Found solutions in 5802 ms
+RData => /var/folders/dq/_bgn79zj25n9w8jbs3x228l80000gn/T/temp7417963597283986541.r
+Solution( Consumption_Fitness=43.47826086956522 , CompletenessFitness=0.0 , OverloadFitness=0.0 , SecurityFitness=0.0 , SLAPerformanceFitness=0.0 ) / 8.695652173913043
+	Node XeonINode_1 : XeonInfraNode
+		Node cust-1024862479 : XenCustomerNode
+		 - Component UserDB_1966586742 : UserDB
+		Node cust1030164118 : XenCustomerNode
+		 - Component WebFrontend_454054545 : WebFrontend
+		 - Component WebFrontend_1345764998 : WebFrontend
+		Node cust128123568 : XenCustomerNode
+		 - Component LoadBalancer_1535518155 : LoadBalancer
+		 - Component LoadBalancer_831356845 : LoadBalancer
+		Node cust995051899 : XenCustomerNode
+		 - Component ItemDB_1862166712 : ItemDB
+		Node cust1935211709 : XenCustomerNode
+		 - Component WebFrontend_1000408040 : WebFrontend
+		Node cust-34217376 : XenCustomerNode
+		 - Component ItemDB_1303387230 : ItemDB
+		 - Component ItemDB_1043590088 : ItemDB
+		Node cust-458058871 : XenCustomerNode
+		 - Component PaymentDB_1128274712 : PaymentDB
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+Solution( Consumption_Fitness=13.043478260869565 , CompletenessFitness=0.0 , OverloadFitness=0.0 , SecurityFitness=30.0 , SLAPerformanceFitness=23.33333333333333 ) / 13.275362318840578
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_1949534936 : ItemDB
+		 - Component ItemDB_626728348 : ItemDB
+		 - Component LoadBalancer_351820245 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component UserDB_1215457427 : UserDB
+		 - Component PaymentDB_759731043 : PaymentDB
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component WebFrontend_2095526003 : WebFrontend
+		 - Component WebFrontend_2066313561 : WebFrontend
+Solution( Consumption_Fitness=13.043478260869565 , CompletenessFitness=0.0 , OverloadFitness=0.0 , SecurityFitness=50.0 , SLAPerformanceFitness=20.0 ) / 16.608695652173914
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component WebFrontend_2044506569 : WebFrontend
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component LoadBalancer_351820245 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component LoadBalancer_1665017424 : LoadBalancer
+		 - Component ItemDB_70686454 : ItemDB
+		 - Component UserDB_2085716281 : UserDB
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component PaymentDB_529256348 : PaymentDB
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=0.0 , SecurityFitness=40.0 , SLAPerformanceFitness=36.666666666666664 ) / 17.072463768115945
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component LoadBalancer_476641977 : LoadBalancer
+		 - Component WebFrontend_2131509761 : WebFrontend
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+Solution( Consumption_Fitness=13.043478260869565 , CompletenessFitness=0.0 , OverloadFitness=0.0 , SecurityFitness=70.0 , SLAPerformanceFitness=13.333333333333329 ) / 19.27536231884058
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component WebFrontend_2044506569 : WebFrontend
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component LoadBalancer_351820245 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component LoadBalancer_1665017424 : LoadBalancer
+		 - Component ItemDB_70686454 : ItemDB
+		 - Component UserDB_2085716281 : UserDB
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component ItemDB_991394746 : ItemDB
+		 - Component PaymentDB_529256348 : PaymentDB
+Solution( Consumption_Fitness=13.043478260869565 , CompletenessFitness=0.0 , OverloadFitness=24.000000000000004 , SecurityFitness=50.0 , SLAPerformanceFitness=16.666666666666657 ) / 20.742028985507243
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_1949534936 : ItemDB
+		 - Component ItemDB_626728348 : ItemDB
+		 - Component LoadBalancer_351820245 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component UserDB_1215457427 : UserDB
+		 - Component PaymentDB_759731043 : PaymentDB
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component WebFrontend_2095526003 : WebFrontend
+		 - Component WebFrontend_2066313561 : WebFrontend
+		 - Component ItemDB_1765656649 : ItemDB
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=28.000000000000004 , SecurityFitness=40.0 , SLAPerformanceFitness=30.0 ) / 21.33913043478261
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_1949534936 : ItemDB
+		 - Component WebFrontend_319191557 : WebFrontend
+		 - Component ItemDB_626728348 : ItemDB
+		 - Component LoadBalancer_351820245 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component PaymentDB_623587965 : PaymentDB
+		 - Component UserDB_1215457427 : UserDB
+	Node ARMINode_2 : ARMInfraNode
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=36.0 , SecurityFitness=40.0 , SLAPerformanceFitness=23.333333333333343 ) / 21.605797101449276
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component LoadBalancer_896845448 : LoadBalancer
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component ItemDB_333732951 : ItemDB
+		 - Component ItemDB_1435977663 : ItemDB
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=43.99999999999999 , SecurityFitness=50.0 , SLAPerformanceFitness=16.666666666666657 ) / 23.87246376811594
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component WebFrontend_2044506569 : WebFrontend
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component LoadBalancer_476641977 : LoadBalancer
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component ItemDB_333732951 : ItemDB
+		 - Component ItemDB_1435977663 : ItemDB
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=40.0 , SecurityFitness=60.0 , SLAPerformanceFitness=13.333333333333343 ) / 24.405797101449277
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component LoadBalancer_896845448 : LoadBalancer
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component LoadBalancer_476641977 : LoadBalancer
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component ItemDB_333732951 : ItemDB
+		 - Component ItemDB_1435977663 : ItemDB
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=31.999999999999996 , SecurityFitness=70.0 , SLAPerformanceFitness=20.0 ) / 26.139130434782608
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component WebFrontend_2044506569 : WebFrontend
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component LoadBalancer_476641977 : LoadBalancer
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component LoadBalancer_351820245 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+Solution( Consumption_Fitness=13.043478260869565 , CompletenessFitness=0.0 , OverloadFitness=48.0 , SecurityFitness=70.0 , SLAPerformanceFitness=6.666666666666657 ) / 27.542028985507244
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component LoadBalancer_73052109 : LoadBalancer
+		 - Component ItemDB_1949534936 : ItemDB
+		 - Component ItemDB_626728348 : ItemDB
+		 - Component LoadBalancer_351820245 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component UserDB_1215457427 : UserDB
+		 - Component PaymentDB_759731043 : PaymentDB
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component WebFrontend_2095526003 : WebFrontend
+		 - Component WebFrontend_2066313561 : WebFrontend
+		 - Component ItemDB_1765656649 : ItemDB
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=24.000000000000004 , SecurityFitness=80.0 , SLAPerformanceFitness=26.666666666666657 ) / 27.87246376811594
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+	Node ARMINode_0 : ARMInfraNode
+		Node cust-1649933161 : XenCustomerNode
+		 - Component ItemDB_2043846112 : ItemDB
+		 - Component WebFrontend_1468432362 : WebFrontend
+		 - Component LoadBalancer_1392449165 : LoadBalancer
+	Node ARMINode_2 : ARMInfraNode
+		Node cust-145921983 : XenCustomerNode
+		 - Component UserDB_2126676138 : UserDB
+		 - Component LoadBalancer_551331854 : LoadBalancer
+		 - Component PaymentDB_293128353 : PaymentDB
+Solution( Consumption_Fitness=13.043478260869565 , CompletenessFitness=0.0 , OverloadFitness=40.0 , SecurityFitness=100.0 , SLAPerformanceFitness=0.0 ) / 30.608695652173914
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_1949534936 : ItemDB
+		 - Component ItemDB_626728348 : ItemDB
+		 - Component LoadBalancer_351820245 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component PaymentDB_623587965 : PaymentDB
+		 - Component LoadBalancer_1794234019 : LoadBalancer
+		 - Component UserDB_1215457427 : UserDB
+		 - Component WebFrontend_1206914833 : WebFrontend
+		 - Component WebFrontend_531820369 : WebFrontend
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component WebFrontend_2066313561 : WebFrontend
+		 - Component ItemDB_1765656649 : ItemDB
+Solution( Consumption_Fitness=13.043478260869565 , CompletenessFitness=0.0 , OverloadFitness=64.0 , SecurityFitness=80.0 , SLAPerformanceFitness=0.0 ) / 31.40869565217391
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component LoadBalancer_896845448 : LoadBalancer
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component ItemDB_333732951 : ItemDB
+		 - Component ItemDB_1435977663 : ItemDB
+	Node ARMINode_0 : ARMInfraNode
+		Node cust-1424850082 : XenCustomerNode
+		 - Component WebFrontend_1273118133 : WebFrontend
+		 - Component LoadBalancer_1754171057 : LoadBalancer
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+		 - Component WebFrontend_594346799 : WebFrontend
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=39.99999999999999 , SecurityFitness=100.0 , SLAPerformanceFitness=13.333333333333329 ) / 32.405797101449274
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component LoadBalancer_476641977 : LoadBalancer
+		 - Component WebFrontend_2131509761 : WebFrontend
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+		 - Component WebFrontend_594346799 : WebFrontend
+		 - Component WebFrontend_1194861601 : WebFrontend
+		 - Component LoadBalancer_1631223520 : LoadBalancer
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=48.0 , SecurityFitness=100.0 , SLAPerformanceFitness=6.666666666666657 ) / 32.672463768115946
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_1075046085 : ItemDB
+		 - Component ItemDB_1949534936 : ItemDB
+		 - Component LoadBalancer_850282928 : LoadBalancer
+		 - Component WebFrontend_276292015 : WebFrontend
+		 - Component PaymentDB_1153457354 : PaymentDB
+		 - Component WebFrontend_530395023 : WebFrontend
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component ItemDB_681866067 : ItemDB
+		 - Component LoadBalancer_1264619242 : LoadBalancer
+		 - Component UserDB_1553278599 : UserDB
+	Node ARMINode_2 : ARMInfraNode
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=56.0 , SecurityFitness=100.0 , SLAPerformanceFitness=0.0 ) / 32.93913043478261
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_1075046085 : ItemDB
+		 - Component ItemDB_1949534936 : ItemDB
+		 - Component LoadBalancer_850282928 : LoadBalancer
+		 - Component WebFrontend_276292015 : WebFrontend
+		 - Component UserDB_333494267 : UserDB
+		 - Component PaymentDB_1153457354 : PaymentDB
+		 - Component WebFrontend_530395023 : WebFrontend
+	Node ARMINode_0 : ARMInfraNode
+		Node cust1654806705 : XenCustomerNode
+		 - Component ItemDB_681866067 : ItemDB
+		 - Component LoadBalancer_1264619242 : LoadBalancer
+		 - Component WebFrontend_531820369 : WebFrontend
+	Node ARMINode_2 : ARMInfraNode
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=72.0 , SecurityFitness=80.0 , SLAPerformanceFitness=10.0 ) / 34.139130434782615
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component WebFrontend_2044506569 : WebFrontend
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component LoadBalancer_476641977 : LoadBalancer
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component ItemDB_333732951 : ItemDB
+		 - Component ItemDB_1435977663 : ItemDB
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+		 - Component WebFrontend_1194861601 : WebFrontend
+Solution( Consumption_Fitness=8.695652173913043 , CompletenessFitness=0.0 , OverloadFitness=68.0 , SecurityFitness=90.0 , SLAPerformanceFitness=6.666666666666657 ) / 34.672463768115946
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component LoadBalancer_896845448 : LoadBalancer
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component LoadBalancer_476641977 : LoadBalancer
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component ItemDB_333732951 : ItemDB
+		 - Component ItemDB_1435977663 : ItemDB
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+		Node cust1864951588 : XenCustomerNode
+		 - Component UserDB_372575443 : UserDB
+		 - Component PaymentDB_529256348 : PaymentDB
+		 - Component WebFrontend_1194861601 : WebFrontend
+Solution( Consumption_Fitness=4.3478260869565215 , CompletenessFitness=0.0 , OverloadFitness=43.99999999999999 , SecurityFitness=100.0 , SLAPerformanceFitness=26.666666666666657 ) / 35.00289855072463
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_1075046085 : ItemDB
+		 - Component UserDB_593391519 : UserDB
+		 - Component LoadBalancer_850282928 : LoadBalancer
+		 - Component LoadBalancer_712846110 : LoadBalancer
+		 - Component PaymentDB_1153457354 : PaymentDB
+		 - Component WebFrontend_530395023 : WebFrontend
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+Solution( Consumption_Fitness=4.3478260869565215 , CompletenessFitness=0.0 , OverloadFitness=51.99999999999999 , SecurityFitness=100.0 , SLAPerformanceFitness=20.0 ) / 35.2695652173913
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component ItemDB_1075046085 : ItemDB
+		 - Component UserDB_593391519 : UserDB
+		 - Component LoadBalancer_850282928 : LoadBalancer
+		 - Component WebFrontend_276292015 : WebFrontend
+		 - Component LoadBalancer_670801643 : LoadBalancer
+		 - Component PaymentDB_1153457354 : PaymentDB
+		 - Component WebFrontend_530395023 : WebFrontend
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+Solution( Consumption_Fitness=4.3478260869565215 , CompletenessFitness=0.0 , OverloadFitness=60.0 , SecurityFitness=100.0 , SLAPerformanceFitness=13.333333333333343 ) / 35.53623188405797
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component LoadBalancer_896845448 : LoadBalancer
+		 - Component ItemDB_2049073685 : ItemDB
+		 - Component UserDB_674455880 : UserDB
+		 - Component PaymentDB_1689193239 : PaymentDB
+		 - Component LoadBalancer_476641977 : LoadBalancer
+		 - Component WebFrontend_2131509761 : WebFrontend
+		 - Component ItemDB_333732951 : ItemDB
+		 - Component ItemDB_1435977663 : ItemDB
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+Solution( Consumption_Fitness=4.3478260869565215 , CompletenessFitness=0.0 , OverloadFitness=39.99999999999999 , SecurityFitness=100.0 , SLAPerformanceFitness=36.666666666666664 ) / 36.20289855072463
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust-2086315252 : XenCustomerNode
+		 - Component ItemDB_263640450 : ItemDB
+		 - Component PaymentDB_1469305528 : PaymentDB
+		 - Component UserDB_1435018766 : UserDB
+		 - Component WebFrontend_561124902 : WebFrontend
+		 - Component LoadBalancer_329228814 : LoadBalancer
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+Solution( Consumption_Fitness=4.3478260869565215 , CompletenessFitness=0.0 , OverloadFitness=72.0 , SecurityFitness=100.0 , SLAPerformanceFitness=10.0 ) / 37.2695652173913
+	Node XeonINode_1 : XeonInfraNode
+	Node XeonINode_0 : XeonInfraNode
+	Node ARMINode_1 : ARMInfraNode
+		Node cust679080115 : XenCustomerNode
+		 - Component WebFrontend_2073734340 : WebFrontend
+		 - Component ItemDB_1978391744 : ItemDB
+		 - Component ItemDB_1075046085 : ItemDB
+		 - Component UserDB_593391519 : UserDB
+		 - Component LoadBalancer_850282928 : LoadBalancer
+		 - Component ItemDB_658585284 : ItemDB
+		 - Component WebFrontend_276292015 : WebFrontend
+		 - Component PaymentDB_1153457354 : PaymentDB
+		 - Component WebFrontend_530395023 : WebFrontend
+	Node ARMINode_0 : ARMInfraNode
+	Node ARMINode_2 : ARMInfraNode
+
+Process finished with exit code 0

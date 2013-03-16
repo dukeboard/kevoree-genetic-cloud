@@ -21,6 +21,8 @@ public class RunnerOptimizeConsumption {
 
     public static Boolean compositeFitness = false;
 
+    public static Double scaleFactor = 1d;
+
     public static void main(String[] args) throws Exception {
 
         SLAModel SLAModel = new SLAModel();
@@ -30,8 +32,10 @@ public class RunnerOptimizeConsumption {
         SLAModel.putVCPULoad(UserDB.class.getSimpleName(), 0.4); //UserDB  need 0.4Ghz
         SLAModel.putVCPULoad(WebFrontend.class.getSimpleName(), 1.2); //WebFrontend  need 2Ghz
 
+        SLAModel = SLAModel.scale(scaleFactor);
+
         KevoreeGeneticEngine engine = new KevoreeGeneticEngine()
-                .setPopulationFactory(new CloudPopulationFactory());
+                .setPopulationFactory(new CloudPopulationFactory().scale(scaleFactor.intValue()));
 
         /* Configure operator */
         AddRandomComponentOperator operator = new AddRandomComponentOperator();
@@ -68,6 +72,7 @@ public class RunnerOptimizeConsumption {
 
         engine.setMaxGeneration(2000);
         SolutionPloter ploter = new SolutionPloter();
+        ploter.setPrefixe("multi");
         engine.setInstrument(ploter);
 
         long currentTime = System.currentTimeMillis();

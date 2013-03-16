@@ -128,7 +128,6 @@ public class SolutionPloter implements KevoreeEngineInstrument {
             if (fitness.equals("mean")) {
                 color = "\"red\"";
                 size = "4";
-                System.out.println("MeanDetected");
             } else {
                 color = "topo.colors(" + timeResults.keySet().size() + ")[" + (fitNb + 1) + "]";
             }
