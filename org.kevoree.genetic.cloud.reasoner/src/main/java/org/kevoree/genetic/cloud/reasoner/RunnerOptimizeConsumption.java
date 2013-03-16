@@ -36,7 +36,7 @@ public class RunnerOptimizeConsumption {
         engine.addFitnessFuntion(new SecurityFitness());
         engine.addFitnessFuntion(new OverloadFitness());
 
-        engine.setMaxGeneration(1000);
+        engine.setMaxGeneration(300);
         SolutionPloter ploter = new SolutionPloter();
         engine.setInstrument(ploter);
 

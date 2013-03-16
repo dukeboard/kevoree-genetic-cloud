@@ -27,7 +27,7 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
         return this;
     }
 
-    private Integer maxRedondency = 5;
+    private Integer maxRedondency = 3;
 
     public Integer getMaxRedondency() {
         return maxRedondency;

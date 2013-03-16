@@ -9,15 +9,18 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.kevoree.genetic.KevoreeEngineInstrument;
 import org.kevoree.genetic.cloud.reasoner.SolutionFilter;
 import org.kevoree.genetic.framework.KevoreeSolution;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 public class SolutionPloter implements KevoreeEngineInstrument {
 
@@ -86,8 +89,21 @@ public class SolutionPloter implements KevoreeEngineInstrument {
                 true,                      // Use tooltips
                 false                      // Configure chart to generate URLs?
         );
+
+        XYItemRenderer renderer = chart.getXYPlot().getRenderer();
+        renderer.setSeriesPaint(0, Color.black);
+        renderer.setSeriesPaint(1, Color.blue);
+        renderer.setSeriesPaint(2, Color.red);
+        renderer.setSeriesPaint(3, Color.gray);
+
+
         try {
-            ChartUtilities.saveChartAsJPEG(new File("/Users/gregory.nain/Desktop/chart.jpeg"), chart, 1024, 500);
+            File temp = File.createTempFile("temp",".jpg");
+            ChartUtilities.saveChartAsJPEG(temp, chart, 1500, 700);
+            System.out.println("Plot => "+temp.getAbsolutePath());
+
+            Desktop.getDesktop().open(temp);
+
         } catch (IOException e) {
             System.err.println("Problem occurred creating chart.");
         }
