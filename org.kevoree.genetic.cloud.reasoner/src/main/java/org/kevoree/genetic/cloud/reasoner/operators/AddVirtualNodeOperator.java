@@ -18,9 +18,10 @@ import java.util.Random;
  */
 public class AddVirtualNodeOperator extends AbstractKevoreeOperator {
 
-    private final String nbSubNodes = "vcpu";
     protected Random rand = new Random();
     private KevoreeFactory factory = new DefaultKevoreeFactory();
+
+    private final String nbSubNodes = "vcpu";
     private PropertyCachedResolver resolver = new PropertyCachedResolver();
 
     @Override
@@ -31,6 +32,11 @@ public class AddVirtualNodeOperator extends AbstractKevoreeOperator {
         ContainerNode parent = (ContainerNode) o;
         parent.addHosts(node);
         containerRoot.addNodes(node);
+
+       //((AbstractKevoreeOperator)getSuccessor()).setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
+        ((AbstractKevoreeOperator)getSuccessor()).setSelectorQuery(node.path());
+
+
     }
 
     protected List<Object> selectTarget(ContainerRoot root, String query) {

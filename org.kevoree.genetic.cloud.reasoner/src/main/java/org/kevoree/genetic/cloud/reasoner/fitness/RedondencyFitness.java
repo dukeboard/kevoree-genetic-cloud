@@ -1,6 +1,7 @@
 package org.kevoree.genetic.cloud.reasoner.fitness;
 
 import org.kevoree.*;
+import org.kevoree.genetic.cloud.reasoner.SLAModel;
 import org.kevoree.genetic.framework.KevoreeFitnessFunction;
 
 import java.util.ArrayList;
@@ -15,15 +16,14 @@ import java.util.List;
  */
 public class RedondencyFitness implements KevoreeFitnessFunction {
 
-    private List<String> types = new ArrayList<String>();
+    private SLAModel slaModel = new SLAModel();
 
-    public RedondencyFitness addType(String t) {
-        types.add(t);
-        return this;
+    public SLAModel getSlaModel() {
+        return slaModel;
     }
 
-    public RedondencyFitness setAllTypes(List<String> _types) {
-        types = _types;
+    public RedondencyFitness setSlaModel(SLAModel slaModel) {
+        this.slaModel = slaModel;
         return this;
     }
 
@@ -43,7 +43,7 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
         HashMap<String, Double> map = new HashMap<String, Double>();
         List<Object> components = model.selectByQuery("nodes[*]/hosts[*]/components[*]");
         Double redondency = 100d;
-        for (String tdName : types) {
+        for (String tdName : slaModel.getTypes()) {
             map.put(tdName, 0d);
         }
         for (Object o : components) {
@@ -54,7 +54,7 @@ public class RedondencyFitness implements KevoreeFitnessFunction {
             Double nbVal = map.get(key);
             if(nbVal > 1){
                 Double localPercent = nbVal / maxRedondency * 100d;
-                redondency = redondency - (localPercent / types.size());
+                redondency = redondency - (localPercent / slaModel.getTypes().size());
             }
         }
         return Math.abs(redondency);

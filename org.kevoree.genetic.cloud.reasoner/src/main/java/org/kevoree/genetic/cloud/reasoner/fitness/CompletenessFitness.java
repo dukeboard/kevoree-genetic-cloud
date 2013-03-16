@@ -2,6 +2,7 @@ package org.kevoree.genetic.cloud.reasoner.fitness;
 
 import org.kevoree.ComponentInstance;
 import org.kevoree.ContainerRoot;
+import org.kevoree.genetic.cloud.reasoner.SLAModel;
 import org.kevoree.genetic.framework.KevoreeFitnessFunction;
 
 import java.util.ArrayList;
@@ -16,15 +17,14 @@ import java.util.List;
  */
 public class CompletenessFitness implements KevoreeFitnessFunction {
 
-    private List<String> types = new ArrayList<String>();
+    private SLAModel slaModel = new SLAModel();
 
-    public CompletenessFitness addType(String t) {
-        types.add(t);
-        return this;
+    public SLAModel getSlaModel() {
+        return slaModel;
     }
 
-    public CompletenessFitness setAllTypes(List<String> _types) {
-        types = _types;
+    public CompletenessFitness setSlaModel(SLAModel slaModel) {
+        this.slaModel = slaModel;
         return this;
     }
 
@@ -33,13 +33,13 @@ public class CompletenessFitness implements KevoreeFitnessFunction {
         HashMap<String, Double> map = new HashMap<String, Double>();
         List<Object> components = model.selectByQuery("nodes[*]/hosts[*]/components[*]");
         Double completeness = 100d;
-        for (String tdName : types) {
+        for (String tdName : slaModel.getTypes()) {
             map.put(tdName, 0d);
         }
         for (Object o : components) {
             ComponentInstance ci = (ComponentInstance) o;
             if (map.get(ci.getTypeDefinition().getName()) == 0d) {
-                completeness = completeness - (100 / types.size());
+                completeness = completeness - (100 / slaModel.getTypes().size());
                 map.put(ci.getTypeDefinition().getName(), 1d);
             }
         }

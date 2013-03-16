@@ -17,7 +17,7 @@ import java.util.List;
 
 public class OverloadFitness implements KevoreeFitnessFunction {
 
-    private Integer percentLostByLoadBreak = 10;
+    private Integer percentLostByLoadBreak = 20;
     private String property = "vcpu_load";
     private PropertyCachedResolver resolver = new PropertyCachedResolver();
 

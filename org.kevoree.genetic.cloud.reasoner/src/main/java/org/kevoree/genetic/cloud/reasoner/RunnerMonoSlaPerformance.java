@@ -2,20 +2,29 @@ package org.kevoree.genetic.cloud.reasoner;
 
 import org.kevoree.genetic.cloud.library.onlineStore.*;
 import org.kevoree.genetic.cloud.reasoner.fitness.*;
-import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.AddRandomComponentOperator;
+import org.kevoree.genetic.cloud.reasoner.operators.AddRandomComponentOperatorNoOverLoad;
+import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.MoveVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.plot.SolutionPloter;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
+import org.kevoree.genetic.framework.KevoreeCompositeFitnessFunction;
+import org.kevoree.genetic.framework.KevoreeFitnessFunction;
 import org.kevoree.genetic.framework.KevoreeGeneticEngine;
 import org.kevoree.genetic.framework.KevoreeSolution;
-import org.kevoree.genetic.library.operator.MoveNode;
 import org.kevoree.genetic.library.operator.RemoveChildNode;
 import org.kevoree.genetic.library.operator.RemoveComponent;
 
 import java.util.List;
 
-public class RunnerOptimizeConsumption {
+/**
+ * Created with IntelliJ IDEA.
+ * User: duke
+ * Date: 16/03/13
+ * Time: 18:27
+ */
+public class RunnerMonoSlaPerformance {
+
 
     public static void main(String[] args) throws Exception {
 
@@ -30,24 +39,20 @@ public class RunnerOptimizeConsumption {
                 .setPopulationFactory(new CloudPopulationFactory());
 
         /* Configure operator */
-        AddRandomComponentOperator operator = new AddRandomComponentOperator();
+        AddRandomComponentOperatorNoOverLoad operator = new AddRandomComponentOperatorNoOverLoad();
         operator.setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
         operator.setSlaModel(SLAModel);
         engine.addOperator(operator);
 
-        engine.addOperator(new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]").setSuccessor(new AddRandomComponentOperator().setSlaModel(SLAModel)));
+        engine.addOperator(new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]").setSuccessor(new AddRandomComponentOperatorNoOverLoad().setSlaModel(SLAModel)));
         engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[*]/hosts[*]/components[*]"));
         engine.addOperator(new RemoveChildNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
         engine.addOperator(new MoveVirtualNodeOperator().setTargetNodesQuery("nodes[{ typeDefinition.name = *InfraNode }]").setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
 
         /* Configure fitness */
-        engine.addFitnessFuntion(new ConsumptionFitness());
-        engine.addFitnessFuntion(new CompletenessFitness().setSlaModel(SLAModel));
-        engine.addFitnessFuntion(new SecurityFitness());
-        engine.addFitnessFuntion(new OverloadFitness());
         engine.addFitnessFuntion(new SLAPerformanceFitness().setSlaModel(SLAModel));
 
-        engine.setMaxGeneration(2000);
+        engine.setMaxGeneration(1000);
         SolutionPloter ploter = new SolutionPloter();
         engine.setInstrument(ploter);
 
@@ -58,9 +63,20 @@ public class RunnerOptimizeConsumption {
 
         ploter.plotResults();
 
-        for (KevoreeSolution solution : filter.order(filter.filterSolution(result))) {
+        KevoreeCompositeFitnessFunction composite = new KevoreeCompositeFitnessFunction();
+        composite.addFitness(new CompletenessFitness().setSlaModel(SLAModel));
+        composite.addFitness(new ConsumptionFitness());
+        composite.addFitness(new OverloadFitness());
+        composite.addFitness(new SecurityFitness());
+
+        for (KevoreeSolution solution : filter.order(result)) {
+            for (KevoreeFitnessFunction fit : composite.getFitnesses()) {
+                 System.out.println(fit.getName()+"->"+fit.evaluate(solution.getModel()));
+            }
             solution.print(System.out);
         }
+
+
     }
 
 

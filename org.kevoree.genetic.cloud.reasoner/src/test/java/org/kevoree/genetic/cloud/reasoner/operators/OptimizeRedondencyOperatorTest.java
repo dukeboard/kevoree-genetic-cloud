@@ -37,7 +37,7 @@ public class OptimizeRedondencyOperatorTest {
             n.addHosts(node);
         }
 
-        OptimizeRedondencyOperator operator = new OptimizeRedondencyOperator();
+        AddRandomComponentOperator operator = new AddRandomComponentOperator();
         operator.addType("ItemDB").addType("LoadBalancer").addType("PaymentDB").addType("UserDB").addType("WebFrontend");
         operator.setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
 
@@ -53,7 +53,7 @@ public class OptimizeRedondencyOperatorTest {
 
     }
 
-    public ContainerRoot test(OptimizeRedondencyOperator operator,ContainerRoot model,Integer nb){
+    public ContainerRoot test(AddRandomComponentOperator operator,ContainerRoot model,Integer nb){
         ContainerRoot model2 = model;
         for (int i = 0; i < (operator.getAllTypes().size()); i++) {
             model2 = operator.mutate(model2);
