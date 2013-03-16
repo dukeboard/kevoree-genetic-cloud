@@ -15,6 +15,8 @@ import java.util.LinkedList;
 
 public class RunnerRandomSolution {
 
+    public static ContainerRoot bestModel;
+
     public static void main(String[] args) throws Exception {
 
         SLAModel SLAModel = new SLAModel();
@@ -49,12 +51,17 @@ public class RunnerRandomSolution {
         LinkedList<GenResult> result = new LinkedList<GenResult>();
         HashMap<String, LinkedList<Measure>> timeResults = new HashMap<String, LinkedList<Measure>>();
 
-        performRound(solutionFactory, result, timeResults, fintessNames, 1, 200);
-        performRound(solutionFactory, result, timeResults, fintessNames, 4, 200);
-        //performRound(solutionFactory, result, timeResults, fintessNames, 20, 200);
-
-
-        ploter.plotResult(timeResults);
+       // for(int i = 0; i < 3 ; i++) {
+        //SLAModel.scale(1d);
+        //performRound(solutionFactory, result, timeResults, fintessNames, 1, 200);
+       //SLAModel.scale(4d);
+        //   performRound(solutionFactory, result, timeResults, fintessNames, 4, 200);
+        SLAModel.scale(12d);
+            performRound(solutionFactory, result, timeResults, fintessNames, 12, 200);
+          //  System.out.println("========");
+        //}
+        ploter.setPrefixe("random_1");
+         ploter.plotResult(timeResults);
 
         //System.out.println("Found " + result.size() + " solutions in " + (System.currentTimeMillis() - currentTime) + " ms");
 
@@ -67,6 +74,7 @@ public class RunnerRandomSolution {
         solutionFactory.setNumberOfInfraNode_fullPower(3 * factor);
         solutionFactory.createBaseModel();
         result.clear();
+        bestModel = null;
         //Generates 200 solutions
         //long currentTime = System.currentTimeMillis();
 
@@ -76,10 +84,13 @@ public class RunnerRandomSolution {
             result.addLast(new GenResult(System.currentTimeMillis() - timestamp3, solution));
         }
         long timestamp4 = System.currentTimeMillis();
-        System.out.println("Generated models for "+(5*factor)+" nodes in " + (timestamp4-timestamp3) + "ms");
+        System.out.println("Generated models for "+(5*factor)+" nodes in " + (timestamp4-timestamp3) + "ms ");
         computeTimes(timeResults, result, fintessNames, "" + (5 * factor));
         long timestamp5 = System.currentTimeMillis();
         System.out.println("Computing metrics in " + (timestamp5-timestamp4) + "ms");
+        for (KevoreeFitnessFunction fit : fintessNames.values()) {
+            System.out.println(fit.getName()+"->"+fit.evaluate(bestModel));
+        }
     }
 
 
@@ -97,8 +108,9 @@ public class RunnerRandomSolution {
             double evalOfMean = fintessNames.get("mean").evaluate(res.model);
             if(evalOfMean < lastMean) {
                 lastMean = evalOfMean;
+                bestModel = res.model;
             }
-           // System.out.println("lastMean:" + lastMean);
+            // System.out.println("lastMean:" + lastMean);
             fitnessValues.addLast(new Measure(res.timestamp, lastMean));
             /*
             //For each fitness append the evaluation.
@@ -112,6 +124,8 @@ public class RunnerRandomSolution {
             }
             */
         }
+
+        System.out.println("Best Mean:" + lastMean);
     }
 
 

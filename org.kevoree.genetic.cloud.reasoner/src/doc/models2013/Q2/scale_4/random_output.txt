@@ -1,0 +1,8 @@
+Generated models for 20 nodes in 8834ms 
+Computing metrics in 313ms
+Best Mean:20.91002044989775
+Consumption_Fitness->83.640081799591
+CompletenessFitness->0.0
+OverloadFitness->0.0
+SecurityFitness->0.0
+/Consumption_Fitness/CompletenessFitness/SecurityFitness/OverloadFitness->20.91002044989775
