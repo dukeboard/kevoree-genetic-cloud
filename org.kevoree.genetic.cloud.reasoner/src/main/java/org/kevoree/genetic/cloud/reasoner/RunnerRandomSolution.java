@@ -44,6 +44,9 @@ public class RunnerRandomSolution {
         OverloadFitness overload = new OverloadFitness();
         fintessNames.put(overload.getName(), overload);
         compositeFunction.addFitness(overload);
+        SLAPerformanceFitness slaPerformanceFitness = new SLAPerformanceFitness();
+        fintessNames.put(slaPerformanceFitness.getName(), slaPerformanceFitness);
+        compositeFunction.addFitness(slaPerformanceFitness);
         fintessNames.put("mean", compositeFunction);
 
 
@@ -54,13 +57,13 @@ public class RunnerRandomSolution {
        // for(int i = 0; i < 3 ; i++) {
         //SLAModel.scale(1d);
         //performRound(solutionFactory, result, timeResults, fintessNames, 1, 200);
-       //SLAModel.scale(4d);
-        //   performRound(solutionFactory, result, timeResults, fintessNames, 4, 200);
-        SLAModel.scale(12d);
-            performRound(solutionFactory, result, timeResults, fintessNames, 12, 200);
+       SLAModel.scale(4d);
+           performRound(solutionFactory, result, timeResults, fintessNames, 4, 200);
+        //SLAModel.scale(12d);
+        //    performRound(solutionFactory, result, timeResults, fintessNames, 12, 200);
           //  System.out.println("========");
         //}
-        ploter.setPrefixe("random_1");
+        ploter.setPrefixe("random_4");
          ploter.plotResult(timeResults);
 
         //System.out.println("Found " + result.size() + " solutions in " + (System.currentTimeMillis() - currentTime) + " ms");
