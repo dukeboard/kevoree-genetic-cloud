@@ -93,7 +93,7 @@ public class RunnerOptimizeConsumption {
             composite.addFitness(new SLAPerformanceFitness().setSlaModel(SLAModel));
             for (KevoreeSolution solution : filter.order(result)) {
                 for (KevoreeFitnessFunction fit : composite.getFitnesses()) {
-                    System.out.println(fit.getName()+"->"+fit.evaluate(solution.getModel()));
+                    System.out.println(fit.getClass().getSimpleName()+"->"+fit.evaluate(solution.getModel()));
                 }
                 solution.print(System.out);
             }

@@ -46,8 +46,4 @@ public class SecurityFitness implements KevoreeFitnessFunction {
         }
     }
 
-    @Override
-    public String getName() {
-        return this.getClass().getSimpleName();
-    }
 }

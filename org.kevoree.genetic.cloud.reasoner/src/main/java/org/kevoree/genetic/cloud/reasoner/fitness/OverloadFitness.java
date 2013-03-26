@@ -43,8 +43,4 @@ public class OverloadFitness implements KevoreeFitnessFunction {
 
     }
 
-    @Override
-    public String getName() {
-        return this.getClass().getSimpleName();
-    }
 }

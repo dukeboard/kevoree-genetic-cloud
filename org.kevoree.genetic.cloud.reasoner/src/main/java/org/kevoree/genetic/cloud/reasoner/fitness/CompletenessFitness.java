@@ -46,8 +46,4 @@ public class CompletenessFitness implements KevoreeFitnessFunction {
         return Math.abs(completeness);
     }
 
-    @Override
-    public String getName() {
-        return CompletenessFitness.class.getSimpleName();
-    }
 }

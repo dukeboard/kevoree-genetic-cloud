@@ -38,9 +38,4 @@ public class ConsumptionFitness implements KevoreeFitnessFunction {
         }
     }
 
-    @Override
-    public String getName() {
-        return "Consumption_Fitness";
-    }
-
 }

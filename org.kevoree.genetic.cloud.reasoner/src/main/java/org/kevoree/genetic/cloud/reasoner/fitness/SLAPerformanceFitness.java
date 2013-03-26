@@ -65,9 +65,4 @@ public class SLAPerformanceFitness implements KevoreeFitnessFunction {
         return (100 - (globalPercent / slaModel.getTypes().size()));
     }
 
-    @Override
-    public String getName() {
-        return SLAPerformanceFitness.class.getSimpleName();
-    }
-
 }
