@@ -53,7 +53,7 @@ public class RunnerPaaSOptimization {
         engine.addFitnessFuntion(new CompletenessFitness().setSlaModel(SLAModel));
         engine.addFitnessFuntion(new CostFitness().setSlaModel(SLAModel));
         engine.addFitnessFuntion(new SecurityFitness().setSlaModel(SLAModel));
-        //engine.addFitnessFuntion(new OverloadFitness());
+        engine.addFitnessFuntion(new OverloadFitness());
         engine.addFitnessFuntion(new SLAPerformanceFitness().setSlaModel(SLAModel));
 
         engine.setMaxGeneration(2000);

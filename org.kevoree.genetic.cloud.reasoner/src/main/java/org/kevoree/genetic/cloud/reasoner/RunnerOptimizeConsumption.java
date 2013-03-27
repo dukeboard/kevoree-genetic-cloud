@@ -35,6 +35,12 @@ public class RunnerOptimizeConsumption {
 
         SLAModel = SLAModel.scale(scaleFactor);
 
+        SLAModel.putSecurityLevel(ItemDB.class.getSimpleName(), 2.0);
+        SLAModel.putSecurityLevel(LoadBalancer.class.getSimpleName(), 0.0);
+        SLAModel.putSecurityLevel(PaymentDB.class.getSimpleName(), 4.0);
+        SLAModel.putSecurityLevel(UserDB.class.getSimpleName(), 3.0);
+        SLAModel.putSecurityLevel(WebFrontend.class.getSimpleName(), 1.0);
+
         KevoreeGeneticEngine engine = new KevoreeGeneticEngine()
                 .setPopulationFactory(new CloudPopulationFactory().scale(scaleFactor.intValue()));
 
@@ -56,14 +62,14 @@ public class RunnerOptimizeConsumption {
             KevoreeCompositeFitnessFunction composite = new KevoreeCompositeFitnessFunction();
             composite.addFitness(new ConsumptionFitness());
             composite.addFitness(new CompletenessFitness().setSlaModel(SLAModel));
-            composite.addFitness(new SecurityFitness());
+            composite.addFitness(new SecurityFitness().setSlaModel(SLAModel));
             composite.addFitness(new OverloadFitness());
             composite.addFitness(new SLAPerformanceFitness().setSlaModel(SLAModel));
             engine.addFitnessFuntion(composite);
         } else {
             engine.addFitnessFuntion(new ConsumptionFitness());
             engine.addFitnessFuntion(new CompletenessFitness().setSlaModel(SLAModel));
-            engine.addFitnessFuntion(new SecurityFitness());
+            engine.addFitnessFuntion(new SecurityFitness().setSlaModel(SLAModel));
             engine.addFitnessFuntion(new OverloadFitness());
             engine.addFitnessFuntion(new SLAPerformanceFitness().setSlaModel(SLAModel));
         }
