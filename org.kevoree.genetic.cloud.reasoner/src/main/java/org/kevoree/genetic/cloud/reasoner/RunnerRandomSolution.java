@@ -35,7 +35,7 @@ public class RunnerRandomSolution {
         ConsumptionFitness consumptionFitness = new ConsumptionFitness();
         fintessNames.put(consumptionFitness.getClass().getSimpleName(), consumptionFitness);
         compositeFunction.addFitness(consumptionFitness);
-        CompletenessFitness completenessFitness = new CompletenessFitness().setSlaModel(SLAModel);
+        AbstractSLAKevoreeFitnessFunction completenessFitness = new CompletenessFitness().setSlaModel(SLAModel);
         fintessNames.put(completenessFitness.getClass().getSimpleName(), completenessFitness);
         compositeFunction.addFitness(completenessFitness);
         SecurityFitness securityFitness = new SecurityFitness();

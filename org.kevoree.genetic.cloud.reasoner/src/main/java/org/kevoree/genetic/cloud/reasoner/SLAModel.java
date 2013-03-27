@@ -1,9 +1,6 @@
 package org.kevoree.genetic.cloud.reasoner;
 
-import org.kevoree.TypeDefinition;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,6 +14,27 @@ import java.util.Set;
 public class SLAModel {
 
     private HashMap<String, Double> slaVCPULoad = new HashMap<String, Double>();
+
+    private HashMap<String, Double> slaSecurity = new HashMap<String, Double>();
+
+    private Double maxCost = 0d;
+
+    public Double getMaxCost() {
+        return maxCost;
+    }
+
+    public void setMaxCost(Double maxCost) {
+        this.maxCost = maxCost;
+    }
+
+    public SLAModel putSecurityLevel(String td, Double p) {
+        slaSecurity.put(td, p);
+        return this;
+    }
+
+    public Double getSecurityLevel(String td) {
+        return slaSecurity.get(td);
+    }
 
     public SLAModel putVCPULoad(String td, Double p) {
         slaVCPULoad.put(td, p);
@@ -35,7 +53,7 @@ public class SLAModel {
         return newSLAMODEL;
     }
 
-    public Set<String> getTypes(){
+    public Set<String> getTypes() {
         return slaVCPULoad.keySet();
     }
 

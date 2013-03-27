@@ -11,8 +11,8 @@ import org.kevoree.genetic.framework.KevoreeCompositeFitnessFunction;
 import org.kevoree.genetic.framework.KevoreeFitnessFunction;
 import org.kevoree.genetic.framework.KevoreeGeneticEngine;
 import org.kevoree.genetic.framework.KevoreeSolution;
-import org.kevoree.genetic.library.operator.RemoveChildNode;
-import org.kevoree.genetic.library.operator.RemoveComponent;
+import org.kevoree.genetic.library.operator.RemoveChildNodeOperator;
+import org.kevoree.genetic.library.operator.RemoveComponentOperator;
 
 import java.util.List;
 
@@ -44,8 +44,8 @@ public class RunnerMonoSlaPerformance {
         engine.addOperator(operator);
 
         engine.addOperator(new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]").setSuccessor(new AddRandomComponentOperatorNoOverLoad().setSlaModel(SLAModel)));
-        engine.addOperator(new RemoveComponent().setSelectorQuery("nodes[*]/hosts[*]/components[*]"));
-        engine.addOperator(new RemoveChildNode().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
+        engine.addOperator(new RemoveComponentOperator().setSelectorQuery("nodes[*]/hosts[*]/components[*]"));
+        engine.addOperator(new RemoveChildNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
         engine.addOperator(new MoveVirtualNodeOperator().setTargetNodesQuery("nodes[{ typeDefinition.name = *InfraNode }]").setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
 
         /* Configure fitness */

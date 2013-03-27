@@ -55,14 +55,7 @@ public class AddRandomComponentOperator extends AbstractKevoreeOperator {
     }
 
     protected List<Object> selectTarget(ContainerRoot root, String query) {
-        if(query.contains("{")){
-            return root.selectByQuery(query);
-        } else {
-            return Collections.singletonList(root.findByPath(query));
-        }
-        //System.out.println("query="+query+"/"+root.selectByQuery(query).size()+"-"+root.findByPath(query));
-        //return root.selectByQuery(query);
+        return root.selectByQuery(query);
     }
-
 
 }

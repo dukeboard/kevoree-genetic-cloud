@@ -3,7 +3,6 @@ package org.kevoree.genetic.cloud.reasoner.fitness;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.genetic.cloud.reasoner.util.PropertyCachedResolver;
-import org.kevoree.genetic.framework.KevoreeFitnessFunction;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +12,7 @@ import org.kevoree.genetic.framework.KevoreeFitnessFunction;
  */
 
 /* */
-public class CostFitness implements KevoreeFitnessFunction {
+public class CostFitness extends AbstractSLAKevoreeFitnessFunction {
 
     private PropertyCachedResolver resolver = new PropertyCachedResolver();
     private static final String dictionaryAttName = "cost";
@@ -24,6 +23,9 @@ public class CostFitness implements KevoreeFitnessFunction {
         for(ContainerNode loopNode : containerRoot.getNodes()){
             gCost += resolver.getDefault(loopNode,dictionaryAttName);
         }
-        return 1/gCost;
+        if(gCost == 0){
+            return 0d;
+        }
+        return (gCost / slaModel.getMaxCost()) * 100;
     }
 }

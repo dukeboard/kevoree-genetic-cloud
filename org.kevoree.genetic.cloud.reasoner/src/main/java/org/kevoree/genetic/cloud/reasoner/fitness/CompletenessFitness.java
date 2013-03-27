@@ -15,23 +15,12 @@ import java.util.List;
  * Date: 14/03/13
  * Time: 19:42
  */
-public class CompletenessFitness implements KevoreeFitnessFunction {
-
-    private SLAModel slaModel = new SLAModel();
-
-    public SLAModel getSlaModel() {
-        return slaModel;
-    }
-
-    public CompletenessFitness setSlaModel(SLAModel slaModel) {
-        this.slaModel = slaModel;
-        return this;
-    }
+public class CompletenessFitness extends AbstractSLAKevoreeFitnessFunction {
 
     @Override
     public double evaluate(ContainerRoot model) {
         HashMap<String, Double> map = new HashMap<String, Double>();
-        List<Object> components = model.selectByQuery("nodes[*]/hosts[*]/components[*]");
+        List<Object> components = model.selectByQuery("nodes[*]/components[*]");
         Double completeness = 100d;
         for (String tdName : slaModel.getTypes()) {
             map.put(tdName, 0d);

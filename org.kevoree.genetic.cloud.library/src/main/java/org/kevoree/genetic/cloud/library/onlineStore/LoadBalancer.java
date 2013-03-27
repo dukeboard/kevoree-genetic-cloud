@@ -6,7 +6,6 @@ import org.kevoree.framework.AbstractComponentType;
 @Library(name = "Snt-Cloud")
 @ComponentType
 @DictionaryType({
-        @DictionaryAttribute(name = "securityLevel", defaultValue = "0", optional = true),
         @DictionaryAttribute(name = "vcpu_load", defaultValue = "0.2", optional = true)
 })
 @Requires({

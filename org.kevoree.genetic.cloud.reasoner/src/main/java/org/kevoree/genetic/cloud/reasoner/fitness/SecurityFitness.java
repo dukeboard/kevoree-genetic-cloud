@@ -4,7 +4,6 @@ import org.kevoree.ComponentInstance;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.genetic.cloud.reasoner.util.PropertyCachedResolver;
-import org.kevoree.genetic.framework.KevoreeFitnessFunction;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,16 +11,15 @@ import org.kevoree.genetic.framework.KevoreeFitnessFunction;
  * Date: 15/03/13
  * Time: 17:06
  */
+
 /**
  * This fitness function mesure security violation.
  * It's based on the following assumption : a component has a security level, if he is hosted on the same node than a component with a lower security level, it introduce a risk
  * If a component with a level 4 is mixed with a component with a security level 2 it introduced a security violation of 2, of it is mixed with a level of 1, it introduced 3 security break, etc ...
- * */
-public class SecurityFitness implements KevoreeFitnessFunction {
+ */
+public class SecurityFitness extends AbstractSLAKevoreeFitnessFunction {
 
     private Integer percentLostBySecurityLevelBreak = 10;
-    private String property = "securityLevel";
-    private PropertyCachedResolver resolver = new PropertyCachedResolver();
 
     @Override
     public double evaluate(ContainerRoot model) {
@@ -31,11 +29,11 @@ public class SecurityFitness implements KevoreeFitnessFunction {
             if (node.getComponents().size() > 0) {
                 //Look for higher security level
                 for (ComponentInstance c : node.getComponents()) {
-                    maxSecurityLevel = Math.max(maxSecurityLevel, resolver.getDefault(c, property));
+                    maxSecurityLevel = Math.max(maxSecurityLevel, slaModel.getSecurityLevel(c.getTypeDefinition().getName()));
                 }
                 //check dif for each component with max security level on the node
                 for (ComponentInstance c : node.getComponents()) {
-                    violationBreak += (maxSecurityLevel - resolver.getDefault(c, property));
+                    violationBreak += (maxSecurityLevel - slaModel.getSecurityLevel(c.getTypeDefinition().getName()));
                 }
             }
         }

@@ -3,7 +3,7 @@ package org.kevoree.genetic.cloud.reasoner.operators;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
 import org.kevoree.genetic.cloud.reasoner.util.PropertyCachedResolver;
-import org.kevoree.genetic.library.operator.MoveNode;
+import org.kevoree.genetic.library.operator.MoveNodeOperator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  * Date: 16/03/13
  * Time: 17:52
  */
-public class MoveVirtualNodeOperator extends MoveNode {
+public class MoveVirtualNodeOperator extends MoveNodeOperator {
 
     private final String nbSubNodes = "vcpu";
     private PropertyCachedResolver resolver = new PropertyCachedResolver();
