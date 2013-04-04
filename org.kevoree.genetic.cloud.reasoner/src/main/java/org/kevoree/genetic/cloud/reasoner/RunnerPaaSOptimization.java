@@ -55,8 +55,10 @@ public class RunnerPaaSOptimization {
         engine.addFitnessFuntion(new SecurityFitness().setSlaModel(SLAModel));
         engine.addFitnessFuntion(new OverloadFitness());
         engine.addFitnessFuntion(new SLAPerformanceFitness().setSlaModel(SLAModel));
+        //engine.addFitnessFuntion(new DistanceFitness());
 
         engine.setMaxGeneration(2000);
+        engine.setDominanceDelta(0.5d);
         SolutionPloter ploter = new SolutionPloter();
         ploter.setPrefixe(prefixe);
         engine.setInstrument(ploter);

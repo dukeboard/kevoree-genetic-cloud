@@ -24,7 +24,7 @@ public class OverloadFitness implements KevoreeFitnessFunction {
     @Override
     public double evaluate(ContainerRoot model) {
         Double allPercent = 0d;
-        List<Object> virtualNodes = model.selectByQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
+        List<Object> virtualNodes = model.selectByQuery("nodes[*]");
         for (Object o : virtualNodes) {
             ContainerNode node = (ContainerNode) o;
             double localVCPULoad = 0;
