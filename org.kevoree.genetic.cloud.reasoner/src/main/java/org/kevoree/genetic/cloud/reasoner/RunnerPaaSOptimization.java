@@ -68,7 +68,7 @@ public class RunnerPaaSOptimization {
         System.out.println("Found solutions in " + (System.currentTimeMillis() - currentTime) + " ms");
         SolutionFilter filter = new SolutionFilter();
 
-        //ploter.plotResults();
+        ploter.plotResults();
 
         for (KevoreeSolution solution : filter.order(filter.filterSolution(result))) {
             solution.print(System.out);
