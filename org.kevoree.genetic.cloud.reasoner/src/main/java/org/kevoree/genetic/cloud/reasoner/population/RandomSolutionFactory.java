@@ -7,6 +7,7 @@ import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.framework.KevoreeMutationOperator;
 import org.kevoree.impl.DefaultKevoreeFactory;
 import org.kevoree.loader.ModelLoader;
+import org.kevoree.loader.XMIModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class RandomSolutionFactory {
     }
 
     public void createBaseModel() {
-        ModelLoader loader = new ModelLoader();
+        ModelLoader loader = new XMIModelLoader();
         rootModel = loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
         /* Fix Immutable */
         for (TypeDefinition td : rootModel.getTypeDefinitions()) {
