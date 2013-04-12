@@ -1,9 +1,6 @@
 package org.kevoree.genetic.cloud.reasoner.operators;
 
-import org.kevoree.ComponentInstance;
-import org.kevoree.ContainerNode;
-import org.kevoree.ContainerRoot;
-import org.kevoree.KevoreeFactory;
+import org.kevoree.*;
 import org.kevoree.genetic.library.operator.AbstractKevoreeOperator;
 import org.kevoree.impl.DefaultKevoreeFactory;
 
@@ -23,15 +20,25 @@ public class CloneNodeOperator extends AbstractKevoreeOperator {
             ContainerNode targetNode = (ContainerNode) o;
             //create a new node instance of a type ... named newTargetNode
             ContainerNode newTargetNode  = factory.createContainerNode();
-           // newTargetNode.setName();
+
+            // Get the type of the node and set the same type for the new  node
+            newTargetNode.setName("Cloned Node");
+            TypeDefinition td =targetNode.getTypeDefinition();
+            newTargetNode.setTypeDefinition(td);
+
 
             //create an instance of each components already defined as child of targetNode
 
 
             for(ComponentInstance ci : targetNode.getComponents())
             {
+                String namecomposent=ci.getName();
                 ComponentInstance ci1= factory.createComponentInstance();
-                ci1= ci;
+                ci1.setName(namecomposent);
+
+                TypeDefinition tdc =ci.getTypeDefinition();
+                ci1.setTypeDefinition(tdc);
+
                 newTargetNode.addComponents(ci1);
             }
 
