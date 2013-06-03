@@ -328,9 +328,11 @@ public class SolutionPloter implements KevoreeEngineInstrument {
             File temp = File.createTempFile("temp", ".jpg");
             ChartUtilities.saveChartAsJPEG(temp, chart, 1500, 700);
             System.out.println("Plot => " + temp.getAbsolutePath());
-
-            Desktop.getDesktop().open(temp);
-
+            try {
+                Desktop.getDesktop().open(temp);
+            } catch (Exception e){
+                System.out.println("Can't automacally open the file, do it manually : "+temp.getAbsolutePath());
+            }
         } catch (IOException e) {
             System.err.println("Problem occurred creating chart.");
         }
