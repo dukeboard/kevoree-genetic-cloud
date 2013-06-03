@@ -44,7 +44,7 @@ public class RandomSolutionFactory {
 
     public void createBaseModel() {
         ModelLoader loader = new XMIModelLoader();
-        rootModel = loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
+        rootModel = (ContainerRoot) loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
         /* Fix Immutable */
         for (TypeDefinition td : rootModel.getTypeDefinitions()) {
             td.setRecursiveReadOnly();

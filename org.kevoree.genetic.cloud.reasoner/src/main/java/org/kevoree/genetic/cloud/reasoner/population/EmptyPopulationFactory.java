@@ -5,6 +5,7 @@ import org.kevoree.cloner.ModelCloner;
 import org.kevoree.genetic.framework.KevoreePopulationFactory;
 import org.kevoree.impl.DefaultKevoreeFactory;
 import org.kevoree.loader.ModelLoader;
+import org.kevoree.loader.XMIModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,9 @@ public class EmptyPopulationFactory implements KevoreePopulationFactory {
     public List<ContainerRoot> createPopulation() {
         ArrayList<ContainerRoot> population = new ArrayList<ContainerRoot>();
         KevoreeFactory factory = new DefaultKevoreeFactory();
-        ModelLoader loader = new ModelLoader();
+        ModelLoader loader = new XMIModelLoader();
         ModelCloner cloner = new ModelCloner();
-        ContainerRoot rootModel = loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
+        ContainerRoot rootModel = (ContainerRoot) loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
         /* Fix Immutable */
         for (TypeDefinition td : rootModel.getTypeDefinitions()) {
             td.setRecursiveReadOnly();

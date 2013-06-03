@@ -41,7 +41,7 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
         KevoreeFactory factory = new DefaultKevoreeFactory();
         ModelLoader loader = new XMIModelLoader();
         ModelCloner cloner = new ModelCloner();
-        ContainerRoot rootModel = loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
+        ContainerRoot rootModel = (ContainerRoot) loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
         /* Fix Immutable */
         for (TypeDefinition td : rootModel.getTypeDefinitions()) {
             td.setRecursiveReadOnly();
