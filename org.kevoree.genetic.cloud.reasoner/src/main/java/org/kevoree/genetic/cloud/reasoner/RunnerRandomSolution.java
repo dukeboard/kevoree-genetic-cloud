@@ -25,6 +25,8 @@ public class RunnerRandomSolution {
         SLAModel.putVCPULoad(PaymentDB.class.getSimpleName(), 0.6); //PaymentDB  need 0.6Ghz
         SLAModel.putVCPULoad(UserDB.class.getSimpleName(), 0.4); //UserDB  need 0.4Ghz
         SLAModel.putVCPULoad(WebFrontend.class.getSimpleName(), 1.2); //WebFrontend  need 2Ghz+
+        SLAModel.scale(4d);
+
 
         RandomSolutionFactory solutionFactory = new RandomSolutionFactory(SLAModel);
 
