@@ -16,18 +16,7 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
     private Integer numberOfInfraNode_lowPower = 3;
     private Integer numberOfInfraNode_fullPower = 2;
 
-    public void setNodeSetup(int totalNumberOfNodes, int percentageOfFullPowerMachine) {
-        setNumberOfInfraNode_fullPower(totalNumberOfNodes/percentageOfFullPowerMachine);
-        setNumberOfInfraNode_lowPower(totalNumberOfNodes-(totalNumberOfNodes/percentageOfFullPowerMachine));
-    }
-
-    public void setNumberOfInfraNode_lowPower(Integer numberOfInfraNode_lowPower) {
-        this.numberOfInfraNode_lowPower = numberOfInfraNode_lowPower;
-    }
-
-    public void setNumberOfInfraNode_fullPower(Integer numberOfInfraNode_fullPower) {
-        this.numberOfInfraNode_fullPower = numberOfInfraNode_fullPower;
-    }
+    protected Integer populationSize = 10;
 
     public CloudPopulationFactory scale(int factor) {
         numberOfInfraNode_lowPower = 3 * factor;
@@ -70,7 +59,7 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
         }
 
         //Fill the whole population
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < populationSize; i++) {
             population.add(cloner.cloneMutableOnly(rootModel, false));
         }
         return population;

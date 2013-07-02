@@ -1,22 +1,5 @@
-package org.kevoree.genetic.cloud.reasoner.plot;/*
-* Author : Gregory Nain (developer.name@uni.lu)
-* Date : 15/03/13
-* (c) 2013 University of Luxembourg – Interdisciplinary Centre for Security Reliability and Trust (SnT)
-* All rights reserved
-*/
+package org.kevoree.genetic.cloud.reasoner.plot;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.data.time.FixedMillisecond;
-import org.jfree.data.time.Millisecond;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import org.kevoree.genetic.KevoreeEngineInstrument;
 import org.kevoree.genetic.cloud.reasoner.SolutionFilter;
 import org.kevoree.genetic.cloud.reasoner.util.Measure;
@@ -26,18 +9,29 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
 public class SolutionPloter implements KevoreeEngineInstrument {
+
+    public enum PointType {point, line;}
+
+    public HashMap<String, PointType> pointConfig = new HashMap<String, PointType>();
+
+    private Integer nbSolutionToPrint = 1;
+
+    public SolutionPloter setBestSolutionNumber(Integer solNB) {
+        nbSolutionToPrint = solNB;
+        return this;
+    }
+
 
     HashMap<String, LinkedList<Measure>> timeResults = new HashMap<String, LinkedList<Measure>>();
 
     private long baseTimestamp = -1;
 
     public void processResult(List<KevoreeSolution> kevoreeSolutions) {
-        if(baseTimestamp == -1){
+        if (baseTimestamp == -1) {
             baseTimestamp = System.currentTimeMillis();
         }
 
@@ -45,24 +39,33 @@ public class SolutionPloter implements KevoreeEngineInstrument {
         if (!kevoreeSolutions.isEmpty()) {
             SolutionFilter filter = new SolutionFilter();
             TreeSet<KevoreeSolution> orderedSolution = filter.order(kevoreeSolutions);
-            KevoreeSolution bestSolution = orderedSolution.first();
-            for (String fitness : bestSolution.getFitnessNames()) {
-                LinkedList<Measure> fitnessValues = timeResults.get(fitness);
-                if (fitnessValues == null) {
-                    fitnessValues = new LinkedList<Measure>();
-                    timeResults.put(fitness, fitnessValues);
+            for (int i = 0; i < nbSolutionToPrint; i++) {
+                KevoreeSolution bestSolution = orderedSolution.pollFirst();
+                if (nbSolutionToPrint == 1) {
+                    for (String fitness : bestSolution.getFitnessNames()) {
+                        LinkedList<Measure> fitnessValues = timeResults.get(fitness);
+                        if (fitnessValues == null) {
+                            fitnessValues = new LinkedList<Measure>();
+                            timeResults.put(fitness, fitnessValues);
+                        }
+                        fitnessValues.addLast(new Measure(calltime, bestSolution.getResultFromFitness(fitness)));
+                    }
                 }
-                fitnessValues.addLast(new Measure(calltime, bestSolution.getResultFromFitness(fitness)));
-            }
-            if(bestSolution.getFitnessNames().size() > 1){
-                LinkedList<Measure> fitnessValues = timeResults.get("mean");
-                if (fitnessValues == null) {
-                    fitnessValues = new LinkedList<Measure>();
-                    timeResults.put("mean", fitnessValues);
-                }
-                fitnessValues.addLast(new Measure(calltime, bestSolution.getFitnessMean()));
-            }
 
+                if (bestSolution != null && bestSolution.getFitnessNames().size() > 1) {
+                    LinkedList<Measure> fitnessValues = timeResults.get("mean");
+                    if (fitnessValues == null) {
+                        fitnessValues = new LinkedList<Measure>();
+                        timeResults.put("mean", fitnessValues);
+
+                        if (nbSolutionToPrint != 1) {
+                            pointConfig.put("mean", PointType.point);
+                        }
+
+                    }
+                    fitnessValues.addLast(new Measure(calltime, bestSolution.getFitnessMean()));
+                }
+            }
 
         }
     }
@@ -77,7 +80,11 @@ public class SolutionPloter implements KevoreeEngineInstrument {
         //plotXY();
         //plotTime();
         //plotTimeInXY();
-        plotR();
+        try {
+            plotR();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -92,9 +99,9 @@ public class SolutionPloter implements KevoreeEngineInstrument {
     }
 
 
-    private void plotR() {
+    private void plotR() throws InterruptedException {
         StringBuffer Rbuffer = new StringBuffer();
-        List<String> colors = Arrays.asList("green", "blue", "black", "gray", "yellow");
+        List<String> colors = Arrays.asList("black", "blue", "gray", "yellow", "green");
 
 
         int fitNb = 0;
@@ -102,8 +109,8 @@ public class SolutionPloter implements KevoreeEngineInstrument {
 
             StringBuffer temp = new StringBuffer();
             StringBuffer temp_time = new StringBuffer();
-            temp.append(prefixe + "_" + fitness.replace("/","_") + " <- c(");
-            temp_time.append(prefixe + "_" + fitness.replace("/","_") + "_t <- c(");
+            temp.append(prefixe + "_" + fitness.replace("/", "_") + " <- c(");
+            temp_time.append(prefixe + "_" + fitness.replace("/", "_") + "_t <- c(");
             LinkedList<Measure> values = timeResults.get(fitness);
             int i = 0;
             for (Measure measure : values) {
@@ -124,10 +131,10 @@ public class SolutionPloter implements KevoreeEngineInstrument {
             Rbuffer.append("par(new = TRUE)\n");
 
             String color = "";
-            String size = "2";
+            String size = "1.8";
             if (fitness.equals("mean")) {
                 color = "\"red\"";
-                size = "4";
+                size = ".8";
             } else {
                 color = "topo.colors(" + timeResults.keySet().size() + ")[" + (fitNb + 1) + "]";
             }
@@ -136,7 +143,20 @@ public class SolutionPloter implements KevoreeEngineInstrument {
                 plot = "plot(xlab=\"Time (ms)\",ylab=\"Fitness Score (%)\",ylim=c(0,100),";
             }
 
-            Rbuffer.append(plot + "" + prefixe + "_" + fitness.replace("/","_") + "_t, " + prefixe + "_" + fitness.replace("/","_") + ",type=\"l\",col=" + color + ",lwd=" + size + ",main=NULL)\n");
+            String pointType = "l";
+            String charType = "";
+            if (pointConfig.containsKey(fitness)) {
+                if (pointConfig.get(fitness).equals(PointType.line)) {
+                    pointType = "l";
+                }
+                if (pointConfig.get(fitness).equals(PointType.point)) {
+                    pointType = "p";
+                    charType = ",pch=20, cex = .5";
+                }
+            }
+
+
+            Rbuffer.append(plot + "" + prefixe + "_" + fitness.replace("/", "_") + "_t, " + prefixe + "_" + fitness.replace("/", "_") + ",type=\"" + pointType + "\",col=" + color + ",lwd=" + size + ",main=NULL" + charType + ")\n");
             fitNb++;
         }
 
@@ -146,7 +166,7 @@ public class SolutionPloter implements KevoreeEngineInstrument {
             if (fitNb != 0) {
                 Rbuffer.append(",");
             }
-            Rbuffer.append("\""+fitness.replace("/","_")+"\"");
+            Rbuffer.append("\"" + fitness.replace("/", "_") + "\"");
             fitNb++;
         }
         fitNb = 0;
@@ -179,7 +199,7 @@ public class SolutionPloter implements KevoreeEngineInstrument {
             if (fitNb != 0) {
                 Rbuffer.append(",");
             }
-            if(fitness.equals("mean")){
+            if (fitness.equals("mean")) {
                 Rbuffer.append("3");
 
             } else {
@@ -192,150 +212,35 @@ public class SolutionPloter implements KevoreeEngineInstrument {
 
         try {
             File tempRoutput = File.createTempFile("temp", ".r");
+
+
+            File tempRoutputPdf = File.createTempFile("temp", ".pdf");
+
+            Rbuffer.append("\n");
+            Rbuffer.insert(0, "pdf(\"" + tempRoutputPdf.getAbsolutePath() + "\",width=6,height=4)\n");
+
+            Rbuffer.append("dev.off()\n");
+
             FileWriter writer = new FileWriter(tempRoutput);
             writer.write(Rbuffer.toString());
             writer.flush();
             writer.close();
             System.out.println("RData => " + tempRoutput.getAbsolutePath());
-            Desktop.getDesktop().open(tempRoutput);
+
+            String[] command = {"Rscript", tempRoutput.getAbsolutePath()};
+            Runtime.getRuntime().exec(command).waitFor();
+
+            System.out.println("Image PDF => " + tempRoutputPdf.getAbsolutePath());
+
+
+            Desktop.getDesktop().open(tempRoutputPdf);
+
         } catch (IOException e) {
             System.err.println("Problem occurred creating chart.");
+            e.printStackTrace();
         }
 
     }
 
-    private void plotXY() {
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        for (String fitness : timeResults.keySet()) {
-            XYSeries series = new XYSeries(fitness);
-            LinkedList<Measure> values = timeResults.get(fitness);
-            int i = 0;
-            for (Measure measure : values) {
-                series.add(i++, measure.value);
-            }
-            dataset.addSeries(series);
-        }
-
-        // Generate the graph
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                "By generation",
-                "Generation index",
-                "SLA satisfaction",
-                dataset,
-                PlotOrientation.VERTICAL,  // Plot Orientation
-                true,                      // Show Legend
-                true,                      // Use tooltips
-                false                      // Configure chart to generate URLs?
-        );
-
-        XYItemRenderer renderer = chart.getXYPlot().getRenderer();
-        renderer.setSeriesPaint(0, Color.black);
-        renderer.setSeriesPaint(1, Color.blue);
-        renderer.setSeriesPaint(2, Color.red);
-        renderer.setSeriesPaint(3, Color.gray);
-
-
-        try {
-            File temp = File.createTempFile("temp", ".jpg");
-            ChartUtilities.saveChartAsJPEG(temp, chart, 1500, 700);
-            System.out.println("Plot => " + temp.getAbsolutePath());
-            Desktop.getDesktop().open(temp);
-        } catch (IOException e) {
-            System.err.println("Problem occurred creating chart.");
-        }
-    }
-
-    private void plotTimeInXY() {
-        XYSeriesCollection dataset = new XYSeriesCollection();
-
-        for (String fitness : timeResults.keySet()) {
-            XYSeries series = new XYSeries(fitness);
-            LinkedList<Measure> values = timeResults.get(fitness);
-            for (Measure measure : values) {
-                System.out.println("" + measure.timestamp + ":" + measure.value);
-                series.add(measure.timestamp, measure.value);
-            }
-            dataset.addSeries(series);
-        }
-
-
-        // Generate the graph
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                "TimeChart",
-                "Time (in ms)",
-                "SLA satisfaction",
-                dataset,
-                PlotOrientation.VERTICAL,  // Plot Orientation
-                true,                      // Show Legend
-                true,                      // Use tooltips
-                false                      // Configure chart to generate URLs?
-        );
-
-        XYItemRenderer renderer = chart.getXYPlot().getRenderer();
-        renderer.setSeriesPaint(0, Color.black);
-        renderer.setSeriesPaint(1, Color.blue);
-        renderer.setSeriesPaint(2, Color.red);
-        renderer.setSeriesPaint(3, Color.gray);
-
-
-        try {
-            File temp = File.createTempFile("temp", ".jpg");
-            ChartUtilities.saveChartAsJPEG(temp, chart, 1500, 700);
-            System.out.println("Plot => " + temp.getAbsolutePath());
-
-            Desktop.getDesktop().open(temp);
-
-        } catch (IOException e) {
-            System.err.println("Problem occurred creating chart.");
-        }
-    }
-
-    private void plotTime() {
-
-        TimeSeriesCollection dataset = new TimeSeriesCollection();
-
-        for (String fitness : timeResults.keySet()) {
-            TimeSeries series = new TimeSeries(fitness, FixedMillisecond.class);
-            LinkedList<Measure> values = timeResults.get(fitness);
-            for (Measure m : values) {
-                series.add(new FixedMillisecond(m.timestamp), m.value);
-            }
-            dataset.addSeries(series);
-        }
-
-
-        // Generate the graph
-        JFreeChart chart = ChartFactory.createTimeSeriesChart(
-                "TimeChart",
-                "Time (min:sec:msec)",
-                "SLA satisfaction",
-                dataset,
-                true,                      // Show Legend
-                true,                      // Use tooltips
-                false                      // Configure chart to generate URLs?
-        );
-
-        XYItemRenderer renderer = chart.getXYPlot().getRenderer();
-        renderer.setSeriesPaint(0, Color.black);
-        renderer.setSeriesPaint(1, Color.blue);
-        renderer.setSeriesPaint(2, Color.red);
-        renderer.setSeriesPaint(3, Color.gray);
-
-        DateAxis axis = (DateAxis) chart.getXYPlot().getDomainAxis();
-        axis.setDateFormatOverride(new SimpleDateFormat("mm:ss:S"));
-
-        try {
-            File temp = File.createTempFile("temp", ".jpg");
-            ChartUtilities.saveChartAsJPEG(temp, chart, 1500, 700);
-            System.out.println("Plot => " + temp.getAbsolutePath());
-            try {
-                Desktop.getDesktop().open(temp);
-            } catch (Exception e){
-                System.out.println("Can't automacally open the file, do it manually : "+temp.getAbsolutePath());
-            }
-        } catch (IOException e) {
-            System.err.println("Problem occurred creating chart.");
-        }
-    }
 
 }

@@ -3,7 +3,6 @@ package org.kevoree.genetic.cloud.reasoner.fitness;
 import org.kevoree.ComponentInstance;
 import org.kevoree.ContainerNode;
 import org.kevoree.ContainerRoot;
-import org.kevoree.genetic.cloud.reasoner.util.PropertyCachedResolver;
 
 /**
  * Created with IntelliJ IDEA.

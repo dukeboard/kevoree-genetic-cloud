@@ -19,92 +19,51 @@ import java.util.Random;
  * Date: 15/03/13
  * Time: 11:12
  */
-public class RandomSolutionFactory {
+public class RandomSolutionFactory extends CloudPopulationFactory {
 
     private KevoreeFactory factory = new DefaultKevoreeFactory();
-    private Integer numberOfInfraNode_lowPower = 3;
-    private Integer numberOfInfraNode_fullPower = 2;
     private Random rand = new Random();
-    private ContainerRoot rootModel;
-    private int vcpuMax = 0;
     private SLAModel slaModel;
 
     public RandomSolutionFactory(SLAModel slaModel) {
         this.slaModel = slaModel;
+        this.populationSize = 1;
     }
 
 
-    public void setNumberOfInfraNode_lowPower(Integer numberOfInfraNode_lowPower) {
-       this.numberOfInfraNode_lowPower = numberOfInfraNode_lowPower;
+    @Override
+    public List<ContainerRoot> createPopulation() {
+        List<ContainerRoot> models = super.createPopulation();
+        models.set(0, doRandom(models.get(0)));
+        return models;
     }
 
-    public void setNumberOfInfraNode_fullPower(Integer numberOfInfraNode_fullPower) {
-        this.numberOfInfraNode_fullPower = numberOfInfraNode_fullPower;
-    }
-
-    public void createBaseModel() {
-        ModelLoader loader = new XMIModelLoader();
-        rootModel = (ContainerRoot) loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
-        /* Fix Immutable */
-        for (TypeDefinition td : rootModel.getTypeDefinitions()) {
-            td.setRecursiveReadOnly();
-        }
-        for (DeployUnit du : rootModel.getDeployUnits()) {
-            du.setRecursiveReadOnly();
-        }
-        for (Repository r : rootModel.getRepositories()) {
-            r.setRecursiveReadOnly();
-        }
-        //Init Infra
-        //Fill Customer LowPowerNode
-        System.out.println("Generation of light nodes");
-        for (int i = 0; i < numberOfInfraNode_lowPower; i++) {
-            ContainerNode node = factory.createContainerNode();
-            node.setName("ARMINode_" + i);
-            TypeDefinition td = rootModel.findTypeDefinitionsByID("ARMInfraNode");
-            for (DictionaryValue v : td.getDictionaryType().getDefaultValues()) {
-                if (v.getAttribute().getName().equals("vcpu")) {
-                    vcpuMax += Integer.parseInt(v.getValue());
-                }
-            }
-            node.setTypeDefinition(td);
-            rootModel.addNodes(node);
-        }
-        System.out.println("Generation of full power nodes");
-        //Fill Customer FullPowerNode
-        for (int i = 0; i < numberOfInfraNode_fullPower; i++) {
-            ContainerNode node = factory.createContainerNode();
-            node.setName("XeonINode_" + i);
-            TypeDefinition td = rootModel.findTypeDefinitionsByID("XeonInfraNode");
-            for (DictionaryValue v : td.getDictionaryType().getDefaultValues()) {
-                if (v.getAttribute().getName().equals("vcpu")) {
-                    vcpuMax += Integer.parseInt(v.getValue());
-                }
-            }
-            node.setTypeDefinition(td);
-            rootModel.addNodes(node);
-        }
-    }
-
-
-    public ContainerRoot createRandomSolution() {
-        ModelCloner cloner = new ModelCloner();
-        ContainerRoot model = cloner.cloneMutableOnly(rootModel, false);
-
+    public ContainerRoot doRandom(ContainerRoot model) {
         KevoreeMutationOperator addVirtualNodeOperator = new AddVirtualNodeOperator().setSelectorQuery("nodes[{ typeDefinition.name = *InfraNode }]");
-        int nbVNodes = 1 + rand.nextInt(vcpuMax-1);
-        for(int i = 0; i < nbVNodes ; i++) {
-            model = addVirtualNodeOperator.mutate(model);
+
+        for (ContainerNode node : model.getNodes()) {
+            int vcpuMax = 0;
+            for (DictionaryValue v : node.getTypeDefinition().getDictionaryType().getDefaultValues()) {
+                if (v.getAttribute().getName().equals("vcpu")) {
+                    vcpuMax += Integer.parseInt(v.getValue());
+                }
+            }
+            if (vcpuMax > 0) {
+                int nbVNodes = rand.nextInt(vcpuMax);
+                for (int i = 0; i < nbVNodes; i++) {
+                    model = addVirtualNodeOperator.mutate(model);
+                }
+            }
         }
 
         List<Object> vNodes = model.selectByQuery("nodes[{ typeDefinition.name = *CustomerNode }]");
         int redondency = 5;
-        for(String type : slaModel.getTypes()) {
+        for (String type : slaModel.getTypes()) {
             int typeRed = rand.nextInt(redondency);
 
-            for(int r = 0; r < typeRed; r++) {
+            for (int r = 0; r < typeRed; r++) {
                 int nodeNum = rand.nextInt(vNodes.size());
-                ContainerNode node = (ContainerNode)vNodes.get(nodeNum);
+                ContainerNode node = (ContainerNode) vNodes.get(nodeNum);
                 TypeDefinition td = model.findTypeDefinitionsByID(type);
                 if (td != null) {
                     ComponentInstance inst = factory.createComponentInstance();
@@ -114,9 +73,7 @@ public class RandomSolutionFactory {
                 }
             }
         }
-
         return model;
-
     }
 
 }

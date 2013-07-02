@@ -2,8 +2,8 @@ package org.kevoree.genetic.cloud.reasoner;
 
 import org.kevoree.genetic.cloud.library.onlineStore.*;
 import org.kevoree.genetic.cloud.reasoner.fitness.*;
-import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.AddRandomComponentOperator;
+import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.MoveVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.plot.SolutionPloter;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
@@ -16,12 +16,10 @@ import org.kevoree.genetic.library.operator.RemoveComponentOperator;
 
 import java.util.List;
 
-public class RunnerOptimizeConsumption {
+public class RunnerOptimizeConsumptionV2 {
 
     public static Boolean compositeFitness = false;
-
-    public static Double scaleFactor = 12d;
-
+    public static Double scaleFactor = 4d;
     public static String prefixe = "multi";
 
     public static void main(String[] args) throws Exception {
@@ -56,26 +54,11 @@ public class RunnerOptimizeConsumption {
         engine.addOperator(new MoveVirtualNodeOperator().setTargetNodesQuery("nodes[{ typeDefinition.name = *InfraNode }]").setSelectorQuery("nodes[{ typeDefinition.name = *CustomerNode }]"));
 
         /* Configure fitness */
-
-
-        if(compositeFitness){
-            KevoreeCompositeFitnessFunction composite = new KevoreeCompositeFitnessFunction();
-            composite.addFitness(new ConsumptionFitness());
-            composite.addFitness(new CompletenessFitness().setSlaModel(SLAModel));
-            composite.addFitness(new SecurityFitness().setSlaModel(SLAModel));
-            composite.addFitness(new OverloadFitness());
-            composite.addFitness(new SLAPerformanceFitness().setSlaModel(SLAModel));
-            engine.addFitnessFuntion(composite);
-        } else {
-            engine.addFitnessFuntion(new ConsumptionFitness());
-            engine.addFitnessFuntion(new CompletenessFitness().setSlaModel(SLAModel));
-            engine.addFitnessFuntion(new SecurityFitness().setSlaModel(SLAModel));
-            engine.addFitnessFuntion(new OverloadFitness());
-            engine.addFitnessFuntion(new SLAPerformanceFitness().setSlaModel(SLAModel));
-        }
-
-
-
+        engine.addFitnessFuntion(new ConsumptionFitness());
+        engine.addFitnessFuntion(new CompletenessFitness().setSlaModel(SLAModel));
+        engine.addFitnessFuntion(new SecurityFitness().setSlaModel(SLAModel));
+        engine.addFitnessFuntion(new OverloadFitness());
+        engine.addFitnessFuntion(new SLAPerformanceFitness().setSlaModel(SLAModel));
 
         engine.setMaxGeneration(2000);
         SolutionPloter ploter = new SolutionPloter().setBestSolutionNumber(1);
@@ -89,23 +72,8 @@ public class RunnerOptimizeConsumption {
 
         ploter.plotResults();
 
-        if(compositeFitness){
-            KevoreeCompositeFitnessFunction composite = new KevoreeCompositeFitnessFunction();
-            composite.addFitness(new ConsumptionFitness());
-            composite.addFitness(new CompletenessFitness().setSlaModel(SLAModel));
-            composite.addFitness(new SecurityFitness().setSlaModel(SLAModel));
-            composite.addFitness(new OverloadFitness());
-            composite.addFitness(new SLAPerformanceFitness().setSlaModel(SLAModel));
-            for (KevoreeSolution solution : filter.order(result)) {
-                for (KevoreeFitnessFunction fit : composite.getFitnesses()) {
-                    System.out.println(fit.getClass().getSimpleName()+"->"+fit.evaluate(solution.getModel()));
-                }
-                solution.print(System.out);
-            }
-        } else {
-            for (KevoreeSolution solution : filter.order(filter.filterSolution(result))) {
-                solution.print(System.out);
-            }
+        for (KevoreeSolution solution : filter.order(filter.filterSolution(result))) {
+            solution.print(System.out);
         }
 
     }
