@@ -9,7 +9,6 @@ import org.kevoree.loader.XMIModelLoader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class CloudPopulationFactory implements KevoreePopulationFactory {
 
@@ -24,14 +23,25 @@ public class CloudPopulationFactory implements KevoreePopulationFactory {
         return this;
     }
 
+    private ContainerRoot baseModel = null;
+
+    private ContainerRoot getBaseModel() {
+        ModelLoader loader = new XMIModelLoader();
+        if (baseModel == null) {
+            baseModel = (ContainerRoot) loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
+        }
+        return baseModel;
+    }
+
     @Override
     public List<ContainerRoot> createPopulation() {
         ArrayList<ContainerRoot> population = new ArrayList<ContainerRoot>();
         KevoreeFactory factory = new DefaultKevoreeFactory();
-        ModelLoader loader = new XMIModelLoader();
         ModelCloner cloner = new ModelCloner();
-        ContainerRoot rootModel = (ContainerRoot) loader.loadModelFromStream(this.getClass().getResourceAsStream("/KEV-INF/lib.kev")).get(0);
         /* Fix Immutable */
+
+        ContainerRoot rootModel = getBaseModel();
+
         for (TypeDefinition td : rootModel.getTypeDefinitions()) {
             td.setRecursiveReadOnly();
         }

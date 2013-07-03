@@ -7,6 +7,7 @@ import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.operators.MoveVirtualNodeOperator;
 import org.kevoree.genetic.cloud.reasoner.plot.SolutionPloter;
 import org.kevoree.genetic.cloud.reasoner.population.CloudPopulationFactory;
+import org.kevoree.genetic.cloud.reasoner.population.RandomSolutionFactory;
 import org.kevoree.genetic.framework.KevoreeCompositeFitnessFunction;
 import org.kevoree.genetic.framework.KevoreeFitnessFunction;
 import org.kevoree.genetic.framework.KevoreeGeneticEngine;
@@ -19,7 +20,7 @@ import java.util.List;
 public class RunnerOptimizeConsumptionV2 {
 
     public static Boolean compositeFitness = false;
-    public static Double scaleFactor = 4d;
+    public static Double scaleFactor = 3d;
     public static String prefixe = "multi";
 
     public static void main(String[] args) throws Exception {
@@ -39,8 +40,10 @@ public class RunnerOptimizeConsumptionV2 {
         SLAModel.putSecurityLevel(UserDB.class.getSimpleName(), 3.0);
         SLAModel.putSecurityLevel(WebFrontend.class.getSimpleName(), 1.0);
 
-        KevoreeGeneticEngine engine = new KevoreeGeneticEngine()
-                .setPopulationFactory(new CloudPopulationFactory().scale(scaleFactor.intValue()));
+
+        CloudPopulationFactory factory = new RandomSolutionFactory(SLAModel,100).scale(scaleFactor.intValue());
+
+        KevoreeGeneticEngine engine = new KevoreeGeneticEngine().setPopulationFactory(factory);//new CloudPopulationFactory().scale(scaleFactor.intValue()));
 
         /* Configure operator */
         AddRandomComponentOperator operator = new AddRandomComponentOperator();

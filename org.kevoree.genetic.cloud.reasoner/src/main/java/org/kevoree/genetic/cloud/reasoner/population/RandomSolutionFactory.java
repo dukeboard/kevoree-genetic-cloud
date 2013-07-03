@@ -1,15 +1,11 @@
 package org.kevoree.genetic.cloud.reasoner.population;
 
 import org.kevoree.*;
-import org.kevoree.cloner.ModelCloner;
 import org.kevoree.genetic.cloud.reasoner.SLAModel;
 import org.kevoree.genetic.cloud.reasoner.operators.AddVirtualNodeOperator;
 import org.kevoree.genetic.framework.KevoreeMutationOperator;
 import org.kevoree.impl.DefaultKevoreeFactory;
-import org.kevoree.loader.ModelLoader;
-import org.kevoree.loader.XMIModelLoader;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,6 +24,11 @@ public class RandomSolutionFactory extends CloudPopulationFactory {
     public RandomSolutionFactory(SLAModel slaModel) {
         this.slaModel = slaModel;
         this.populationSize = 1;
+    }
+
+    public RandomSolutionFactory(SLAModel slaModel, Integer popSize) {
+        this.slaModel = slaModel;
+        this.populationSize = popSize;
     }
 
 
